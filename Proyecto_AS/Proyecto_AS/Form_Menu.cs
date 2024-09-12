@@ -1,0 +1,140 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Proyecto_AS
+{
+    public partial class Form_Menu : Form
+    {
+        public Form_Menu()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            ocultar_paneles();
+        }
+
+        private void ocultar_paneles() /*Creamos un metodo para ocultar los submenus al iniciar*/
+        {
+            panelProductosSubMenu.Visible = false; /*con esta linea ocultamos el submenu de productos*/
+            panelUsuariosSubMenu.Visible = false;
+        }
+
+        private void hideSubMenu() /*creamos un funcion para ocultar los submenu*/ 
+        {
+            if (panelProductosSubMenu.Visible == true)
+                panelProductosSubMenu.Visible = false;
+            if (panelUsuariosSubMenu.Visible == true)
+                panelUsuariosSubMenu.Visible = false;
+        }
+
+        private void mostrarSubMenu(Panel subMenu) 
+        { /*creamos un funcion que muestre los sub menus cada vez que se le hacen click*/
+            if(subMenu.Visible == false)
+            {
+                hideSubMenu();
+                subMenu.Visible = true;
+            }
+            else
+                subMenu.Visible = false;
+        }
+        #region subMenuProductos
+
+        private void btnProductos_Click(object sender, EventArgs e)
+        {
+            mostrarSubMenu(panelProductosSubMenu);
+        }
+
+        private void btnMostrarProdutos_Click(object sender, EventArgs e)
+        {
+            openChildForm(new Form_Ver_Producto()); /*abrimos el form de ver productos en el panel*/
+            hideSubMenu();
+        }
+
+        private void btnAñadirProductos_Click(object sender, EventArgs e)
+        {
+            openChildForm(new Form_Añadir_Productos());
+            hideSubMenu();
+        }
+
+        private void btnEditarProductos_Click(object sender, EventArgs e)
+        {
+            openChildForm(new Form_Editar_Productos());
+            hideSubMenu();
+        }
+
+        private void btnEliminarProductos_Click(object sender, EventArgs e)
+        {
+            openChildForm(new Form_Eliminar_Productos());
+            hideSubMenu();
+        }
+        #endregion 
+
+        #region subMenuUsuarios
+        private void btnUsuarios_Click(object sender, EventArgs e)
+        {
+            mostrarSubMenu(panelUsuariosSubMenu);
+        }
+        private void btnMostarUsuario_Click(object sender, EventArgs e)
+        {
+            openChildForm(new Form_Ver_Usuario());
+            hideSubMenu();
+        }
+
+        private void btnAñadirUsuario_Click(object sender, EventArgs e)
+        {
+            openChildForm(new Form_Añadir_Usuario());
+            hideSubMenu();
+        }
+
+        private void btnEditarUsuario_Click(object sender, EventArgs e)
+        {
+            openChildForm(new Form_Editar_Usuario());
+            hideSubMenu();
+        }
+
+        private void btnEliminarUsuario_Click(object sender, EventArgs e)
+        {
+            openChildForm(new Form_Eliminar_Usuario());
+            hideSubMenu();
+        }
+        #endregion
+
+        private Form activeForm = null; /*esta linea nos dice si hay un formulario abierto*/
+        private void openChildForm(Form chilForm)
+        { /*creamos una funcion para abrir solo un form dentro del panel*/
+            if (activeForm != null)
+                activeForm.Close();
+            activeForm = chilForm;
+            chilForm.TopLevel = false;
+            chilForm.FormBorderStyle = FormBorderStyle.None;
+            chilForm.Dock = DockStyle.Fill;
+            panelChildForm.Controls.Add(chilForm);
+            panelChildForm.Tag = chilForm;
+            chilForm.BringToFront();
+            chilForm.Show();
+        }
+
+        private void btnCerraSesion_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Form_login().Show();
+        }
+
+        private void panelChildForm_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+    }
+
+    
+}
