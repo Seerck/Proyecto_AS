@@ -37,11 +37,11 @@ namespace Proyecto_AS
 
         public void insertar()
         {
-            if (nombrecmd.Text != "" && tipocmd.Text != "" && txt_cantidad.Text != "" && txt_precio.Text != "" && ubicacioncmd.Text != "" &&
-                fechaingresocmd.Text != "" && fechasalidacmd.Text != "" && estadocmd.Text != "")
+            if (nombrecmd.Text != "" && cmdtipo.SelectedIndex > -1  && txt_cantidad.Text != "" && txt_precio.Text != "" && ubicacioncmd.Text != "" &&
+                fechaingresocmd.Text != "" && fechasalidacmd.Text != "" && estadocmb.SelectedIndex > -1 )
             {
                 string cmd = "INSERT INTO PRODUCTO (Nombre, Tipo, Cantidad, Precio, Ubicacion, FechaIngreso, FechaSalida, Estado, NivelEstante) " +
-                     "VALUES ('" + nombrecmd.Text + "','" + tipocmd.Text + "', '" + txt_cantidad.Text + "','" + txt_precio.Text  + "','" + ubicacioncmd.Text + "','" + fechaingresocmd.Text + "','" + fechasalidacmd.Text + "','" + estadocmd.Text + "', '" + estantecmd.Text + "')";
+                     "VALUES ('" + nombrecmd.Text + "','" + cmdtipo.Text + "', '" + txt_cantidad.Text + "','" + txt_precio.Text  + "','" + ubicacioncmd.Text + "','" + fechaingresocmd.Text + "','" + fechasalidacmd.Text + "','" + estadocmb.Text + "', '" + estantecmd.Text + "')";
                 SqlCommand sqlCommand = new SqlCommand(cmd, conectar);
                 conectar.Open();
                 sqlCommand.ExecuteNonQuery();
@@ -51,7 +51,7 @@ namespace Proyecto_AS
             }
             else
             {
-                MessageBox.Show("Por favor, rellene todos los datos");
+                MessageBox.Show("Rellene todos los campos porfavor", "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -204,16 +204,44 @@ namespace Proyecto_AS
         private void btnañadir_Click(object sender, EventArgs e)
         {
             insertar();
+            consultar();
         }
 
         private void Form_Añadir_Productos_Load(object sender, EventArgs e)
         {
-
+            consultar();
         }
 
         private void txt_cantidad_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txt_cantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo números (0-9), la tecla Backspace y no aceptar otros caracteres
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;  // Cancela el evento si no es un número o control
+            }
+        }
+
+        private void txt_precio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo números (0-9), la tecla Backspace y no aceptar otros caracteres
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;  // Cancela el evento si no es un número o control
+            }
+        }
+
+        private void estantecmd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo números (0-9), la tecla Backspace y no aceptar otros caracteres
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;  // Cancela el evento si no es un número o control
+            }
         }
     }
 }

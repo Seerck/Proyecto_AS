@@ -30,11 +30,9 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.nombrecmd = new System.Windows.Forms.TextBox();
-            this.tipocmd = new System.Windows.Forms.TextBox();
             this.ubicacioncmd = new System.Windows.Forms.TextBox();
             this.fechaingresocmd = new System.Windows.Forms.TextBox();
             this.fechasalidacmd = new System.Windows.Forms.TextBox();
-            this.estadocmd = new System.Windows.Forms.TextBox();
             this.btnañadir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,6 +46,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txt_cantidad = new System.Windows.Forms.TextBox();
             this.txt_precio = new System.Windows.Forms.TextBox();
+            this.estadocmb = new System.Windows.Forms.ComboBox();
+            this.cmdtipo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,16 +68,10 @@
             // nombrecmd
             // 
             this.nombrecmd.Location = new System.Drawing.Point(12, 381);
+            this.nombrecmd.MaxLength = 25;
             this.nombrecmd.Name = "nombrecmd";
             this.nombrecmd.Size = new System.Drawing.Size(261, 22);
             this.nombrecmd.TabIndex = 2;
-            // 
-            // tipocmd
-            // 
-            this.tipocmd.Location = new System.Drawing.Point(12, 425);
-            this.tipocmd.Name = "tipocmd";
-            this.tipocmd.Size = new System.Drawing.Size(261, 22);
-            this.tipocmd.TabIndex = 3;
             // 
             // ubicacioncmd
             // 
@@ -100,16 +94,9 @@
             this.fechasalidacmd.Size = new System.Drawing.Size(261, 22);
             this.fechasalidacmd.TabIndex = 7;
             // 
-            // estadocmd
-            // 
-            this.estadocmd.Location = new System.Drawing.Point(311, 518);
-            this.estadocmd.Name = "estadocmd";
-            this.estadocmd.Size = new System.Drawing.Size(261, 22);
-            this.estadocmd.TabIndex = 8;
-            // 
             // btnañadir
             // 
-            this.btnañadir.Location = new System.Drawing.Point(623, 461);
+            this.btnañadir.Location = new System.Drawing.Point(595, 425);
             this.btnañadir.Name = "btnañadir";
             this.btnañadir.Size = new System.Drawing.Size(218, 70);
             this.btnañadir.TabIndex = 9;
@@ -165,7 +152,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(314, 451);
+            this.label6.Location = new System.Drawing.Point(308, 451);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(87, 16);
             this.label6.TabIndex = 15;
@@ -174,7 +161,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(308, 499);
+            this.label7.Location = new System.Drawing.Point(592, 362);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 16);
             this.label7.TabIndex = 16;
@@ -183,7 +170,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(610, 362);
+            this.label8.Location = new System.Drawing.Point(314, 499);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(86, 16);
             this.label8.TabIndex = 17;
@@ -191,10 +178,11 @@
             // 
             // estantecmd
             // 
-            this.estantecmd.Location = new System.Drawing.Point(613, 381);
+            this.estantecmd.Location = new System.Drawing.Point(311, 518);
             this.estantecmd.Name = "estantecmd";
             this.estantecmd.Size = new System.Drawing.Size(261, 22);
             this.estantecmd.TabIndex = 18;
+            this.estantecmd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.estantecmd_KeyPress);
             // 
             // label9
             // 
@@ -208,10 +196,12 @@
             // txt_cantidad
             // 
             this.txt_cantidad.Location = new System.Drawing.Point(12, 470);
+            this.txt_cantidad.MaxLength = 6;
             this.txt_cantidad.Name = "txt_cantidad";
             this.txt_cantidad.Size = new System.Drawing.Size(261, 22);
             this.txt_cantidad.TabIndex = 21;
             this.txt_cantidad.TextChanged += new System.EventHandler(this.txt_cantidad_TextChanged);
+            this.txt_cantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cantidad_KeyPress);
             // 
             // txt_precio
             // 
@@ -219,13 +209,42 @@
             this.txt_precio.Name = "txt_precio";
             this.txt_precio.Size = new System.Drawing.Size(258, 22);
             this.txt_precio.TabIndex = 22;
+            this.txt_precio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_precio_KeyPress);
+            // 
+            // estadocmb
+            // 
+            this.estadocmb.FormattingEnabled = true;
+            this.estadocmb.Items.AddRange(new object[] {
+            "Habilitado",
+            "Desabilitado"});
+            this.estadocmb.Location = new System.Drawing.Point(595, 381);
+            this.estadocmb.Name = "estadocmb";
+            this.estadocmb.Size = new System.Drawing.Size(218, 24);
+            this.estadocmb.TabIndex = 23;
+            this.estadocmb.Text = "Seleccionar";
+            // 
+            // cmdtipo
+            // 
+            this.cmdtipo.FormattingEnabled = true;
+            this.cmdtipo.Items.AddRange(new object[] {
+            "Cosmetico",
+            "Ropa",
+            "Electronico",
+            "Calzado"});
+            this.cmdtipo.Location = new System.Drawing.Point(15, 424);
+            this.cmdtipo.Name = "cmdtipo";
+            this.cmdtipo.Size = new System.Drawing.Size(258, 24);
+            this.cmdtipo.TabIndex = 24;
+            this.cmdtipo.Text = "Seleccionar";
             // 
             // Form_Añadir_Productos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
-            this.ClientSize = new System.Drawing.Size(904, 567);
+            this.ClientSize = new System.Drawing.Size(905, 567);
+            this.Controls.Add(this.cmdtipo);
+            this.Controls.Add(this.estadocmb);
             this.Controls.Add(this.txt_precio);
             this.Controls.Add(this.txt_cantidad);
             this.Controls.Add(this.label9);
@@ -239,16 +258,13 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnañadir);
-            this.Controls.Add(this.estadocmd);
             this.Controls.Add(this.fechasalidacmd);
             this.Controls.Add(this.fechaingresocmd);
             this.Controls.Add(this.ubicacioncmd);
-            this.Controls.Add(this.tipocmd);
             this.Controls.Add(this.nombrecmd);
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form_Añadir_Productos";
-            this.Text = "Añadir Productos";
             this.Load += new System.EventHandler(this.Form_Añadir_Productos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -260,11 +276,9 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox nombrecmd;
-        private System.Windows.Forms.TextBox tipocmd;
         private System.Windows.Forms.TextBox ubicacioncmd;
         private System.Windows.Forms.TextBox fechaingresocmd;
         private System.Windows.Forms.TextBox fechasalidacmd;
-        private System.Windows.Forms.TextBox estadocmd;
         private System.Windows.Forms.Button btnañadir;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -278,5 +292,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txt_cantidad;
         private System.Windows.Forms.TextBox txt_precio;
+        private System.Windows.Forms.ComboBox estadocmb;
+        private System.Windows.Forms.ComboBox cmdtipo;
     }
 }
