@@ -16,5 +16,10 @@ namespace Proyecto_AS
         {
             InitializeComponent();
         }
+
+        private void Form_Editar_Usuario_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
