@@ -48,6 +48,8 @@
             this.txt_precio = new System.Windows.Forms.TextBox();
             this.estadocmb = new System.Windows.Forms.ComboBox();
             this.cmdtipo = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.fecha_vencimientocmd = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,6 +75,7 @@
             this.nombrecmd.Name = "nombrecmd";
             this.nombrecmd.Size = new System.Drawing.Size(261, 22);
             this.nombrecmd.TabIndex = 2;
+            this.nombrecmd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nombrecmd_KeyPress);
             // 
             // ubicacioncmd
             // 
@@ -84,20 +87,24 @@
             // fechaingresocmd
             // 
             this.fechaingresocmd.Location = new System.Drawing.Point(311, 425);
+            this.fechaingresocmd.MaxLength = 10;
             this.fechaingresocmd.Name = "fechaingresocmd";
             this.fechaingresocmd.Size = new System.Drawing.Size(261, 22);
             this.fechaingresocmd.TabIndex = 6;
+            this.fechaingresocmd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fechaingresocmd_KeyPress);
             // 
             // fechasalidacmd
             // 
-            this.fechasalidacmd.Location = new System.Drawing.Point(311, 470);
+            this.fechasalidacmd.Location = new System.Drawing.Point(311, 518);
+            this.fechasalidacmd.MaxLength = 10;
             this.fechasalidacmd.Name = "fechasalidacmd";
             this.fechasalidacmd.Size = new System.Drawing.Size(261, 22);
             this.fechasalidacmd.TabIndex = 7;
+            this.fechasalidacmd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fechasalidacmd_KeyPress);
             // 
             // btnañadir
             // 
-            this.btnañadir.Location = new System.Drawing.Point(595, 425);
+            this.btnañadir.Location = new System.Drawing.Point(595, 470);
             this.btnañadir.Name = "btnañadir";
             this.btnañadir.Size = new System.Drawing.Size(218, 70);
             this.btnañadir.TabIndex = 9;
@@ -155,9 +162,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(308, 451);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(87, 16);
+            this.label6.Size = new System.Drawing.Size(122, 16);
             this.label6.TabIndex = 15;
-            this.label6.Text = "Fecha Salida";
+            this.label6.Text = "Fecha Vencimiento";
             // 
             // label7
             // 
@@ -171,7 +178,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(314, 499);
+            this.label8.Location = new System.Drawing.Point(592, 408);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(86, 16);
             this.label8.TabIndex = 17;
@@ -179,9 +186,9 @@
             // 
             // estantecmd
             // 
-            this.estantecmd.Location = new System.Drawing.Point(311, 518);
+            this.estantecmd.Location = new System.Drawing.Point(595, 426);
             this.estantecmd.Name = "estantecmd";
-            this.estantecmd.Size = new System.Drawing.Size(261, 22);
+            this.estantecmd.Size = new System.Drawing.Size(218, 22);
             this.estantecmd.TabIndex = 18;
             this.estantecmd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.estantecmd_KeyPress);
             // 
@@ -197,7 +204,7 @@
             // txt_cantidad
             // 
             this.txt_cantidad.Location = new System.Drawing.Point(12, 470);
-            this.txt_cantidad.MaxLength = 6;
+            this.txt_cantidad.MaxLength = 3;
             this.txt_cantidad.Name = "txt_cantidad";
             this.txt_cantidad.Size = new System.Drawing.Size(261, 22);
             this.txt_cantidad.TabIndex = 21;
@@ -206,7 +213,8 @@
             // 
             // txt_precio
             // 
-            this.txt_precio.Location = new System.Drawing.Point(15, 518);
+            this.txt_precio.Location = new System.Drawing.Point(12, 518);
+            this.txt_precio.MaxLength = 6;
             this.txt_precio.Name = "txt_precio";
             this.txt_precio.Size = new System.Drawing.Size(258, 22);
             this.txt_precio.TabIndex = 22;
@@ -232,11 +240,29 @@
             "Ropa",
             "Electronico",
             "Calzado"});
-            this.cmdtipo.Location = new System.Drawing.Point(15, 424);
+            this.cmdtipo.Location = new System.Drawing.Point(12, 424);
             this.cmdtipo.Name = "cmdtipo";
             this.cmdtipo.Size = new System.Drawing.Size(258, 24);
             this.cmdtipo.TabIndex = 24;
             this.cmdtipo.Text = "Seleccionar";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(308, 499);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(85, 16);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Fecha salida";
+            // 
+            // fecha_vencimientocmd
+            // 
+            this.fecha_vencimientocmd.Location = new System.Drawing.Point(311, 471);
+            this.fecha_vencimientocmd.MaxLength = 10;
+            this.fecha_vencimientocmd.Name = "fecha_vencimientocmd";
+            this.fecha_vencimientocmd.Size = new System.Drawing.Size(261, 22);
+            this.fecha_vencimientocmd.TabIndex = 26;
+            this.fecha_vencimientocmd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_fechacaducidad_KeyPress);
             // 
             // Form_Añadir_Productos
             // 
@@ -244,6 +270,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(905, 567);
+            this.Controls.Add(this.fecha_vencimientocmd);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.cmdtipo);
             this.Controls.Add(this.estadocmb);
             this.Controls.Add(this.txt_precio);
@@ -295,5 +323,7 @@
         private System.Windows.Forms.TextBox txt_precio;
         private System.Windows.Forms.ComboBox estadocmb;
         private System.Windows.Forms.ComboBox cmdtipo;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox fecha_vencimientocmd;
     }
 }

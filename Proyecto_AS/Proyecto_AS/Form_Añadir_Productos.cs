@@ -16,9 +16,9 @@ namespace Proyecto_AS
     {
         //wena mati
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
-        static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
+        //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
         //static string inicio_sesion = "Server=PAOLO\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
-        //static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
+        static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
         //static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
         public Form_Añadir_Productos()
@@ -39,10 +39,10 @@ namespace Proyecto_AS
         public void insertar()
         {
             if (nombrecmd.Text != "" && cmdtipo.SelectedIndex > -1  && txt_cantidad.Text != "" && txt_precio.Text != "" && ubicacioncmd.Text != "" &&
-                fechaingresocmd.Text != "" && fechasalidacmd.Text != "" && estadocmb.SelectedIndex > -1 )
+                fechaingresocmd.Text != "" && fechasalidacmd.Text != "" && fecha_vencimientocmd.Text != "" && estadocmb.SelectedIndex > -1 )
             {
-                string cmd = "INSERT INTO PRODUCTO (Nombre, Tipo, Cantidad, Precio, Ubicacion, FechaIngreso, FechaSalida, Estado, NivelEstante) " +
-                     "VALUES ('" + nombrecmd.Text + "','" + cmdtipo.Text + "', '" + txt_cantidad.Text + "','" + txt_precio.Text  + "','" + ubicacioncmd.Text + "','" + fechaingresocmd.Text + "','" + fechasalidacmd.Text + "','" + estadocmb.Text + "', '" + estantecmd.Text + "')";
+                string cmd = "INSERT INTO PRODUCTO (Nombre, Tipo, Cantidad, Precio, Caducidad, Ubicacion, FechaIngreso, FechaSalida, Estado, NivelEstante) " +
+                     "VALUES ('" + nombrecmd.Text + "','" + cmdtipo.Text + "', '" + txt_cantidad.Text + "','" + txt_precio.Text + "','" + fecha_vencimientocmd.Text  + "','" + ubicacioncmd.Text + "', '" + fechaingresocmd.Text + "','" + fechasalidacmd.Text + "','" + estadocmb.Text + "', '" + estantecmd.Text + "')";
                 SqlCommand sqlCommand = new SqlCommand(cmd, conectar);
                 conectar.Open();
                 sqlCommand.ExecuteNonQuery();
@@ -135,6 +135,7 @@ namespace Proyecto_AS
             rod["Ubicacion"] = "";
             red.Rows.InsertAt(rod, 0);
         }
+
 
         public void FechaIngreso()
         {
@@ -242,6 +243,47 @@ namespace Proyecto_AS
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;  // Cancela el evento si no es un número o control
+            }
+        }
+
+        private void nombrecmd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo letras, espacios y teclas de control (Backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;  // Cancela el evento si no es una letra, espacio o tecla de control
+            }
+        }
+
+        private void fechaingresocmd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo números, el carácter "-", teclas de control (Backspace, Delete, etc.)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '-')
+            {
+                e.Handled = true;  // Cancela el evento si no es un número, "-", o tecla de control
+            }
+        }
+
+        private void fechasalidacmd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo números, el carácter "-", teclas de control (Backspace, Delete, etc.)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '-')
+            {
+                e.Handled = true;  // Cancela el evento si no es un número, "-", o tecla de control
+            }
+        }
+
+        private void txt_fechasalida_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txt_fechacaducidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo números, el carácter "-", teclas de control (Backspace, Delete, etc.)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '-')
+            {
+                e.Handled = true;  // Cancela el evento si no es un número, "-", o tecla de control
             }
         }
     }
