@@ -14,8 +14,8 @@ namespace Proyecto_AS
     public partial class Form_Ver_Producto : Form
     {
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
-        static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;"; 
-        //static string inicio_sesion = "Server=PAOLO\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
+        //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;"; 
+        static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
         public Form_Ver_Producto()
         {
@@ -24,7 +24,7 @@ namespace Proyecto_AS
 
         private void Form_Ver_Producto_Load(object sender, EventArgs e)
         {
-            mostrar_producto();
+
         }
         public void mostrar_producto()
         {
@@ -36,6 +36,16 @@ namespace Proyecto_AS
             dataGridView1.DataSource = dt; //motramos los datos en el datagriedview
 
             conectar.Close(); //cerramos la conexion a la bd
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
