@@ -18,8 +18,8 @@ namespace Proyecto_AS
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
         //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
         //static string inicio_sesion = "Server=PAOLO\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
-        static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
-        //static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
+        //static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
+        static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
         public Form_Añadir_Productos()
         {
@@ -39,10 +39,10 @@ namespace Proyecto_AS
         public void insertar()
         {
             if (nombrecmd.Text != "" && cmdtipo.SelectedIndex > -1  && txt_cantidad.Text != "" && txt_precio.Text != "" && ubicacioncmd.Text != "" &&
-                fechaingresocmd.Text != "" && fechasalidacmd.Text != "" && fecha_vencimientocmd.Text != "" && estadocmb.SelectedIndex > -1 )
+                fechaingresocmd.Text !=  "" && fecha_vencimientocmd.Text != "" && estantecmd.Text != "" && estadocmb.SelectedIndex > -1 )
             {
-                string cmd = "INSERT INTO PRODUCTO (Nombre, Tipo, Cantidad, Precio, Caducidad, Ubicacion, FechaIngreso, FechaSalida, Estado, NivelEstante) " +
-                     "VALUES ('" + nombrecmd.Text + "','" + cmdtipo.Text + "', '" + txt_cantidad.Text + "','" + txt_precio.Text + "','" + fecha_vencimientocmd.Text  + "','" + ubicacioncmd.Text + "', '" + fechaingresocmd.Text + "','" + fechasalidacmd.Text + "','" + estadocmb.Text + "', '" + estantecmd.Text + "')";
+                string cmd = "INSERT INTO PRODUCTO (Nombre, Tipo, Cantidad, Precio, Caducidad, Ubicacion, FechaIngreso,  Estado, NivelEstante) " +
+                     "VALUES ('" + nombrecmd.Text + "','" + cmdtipo.Text + "', '" + txt_cantidad.Text + "','" + txt_precio.Text + "','" + fecha_vencimientocmd.Text  + "','" + ubicacioncmd.Text + "', '" + fechaingresocmd.Text + "','" + estadocmb.Text + "', '" + estantecmd.Text + "')";
                 SqlCommand sqlCommand = new SqlCommand(cmd, conectar);
                 conectar.Open();
                 sqlCommand.ExecuteNonQuery();
