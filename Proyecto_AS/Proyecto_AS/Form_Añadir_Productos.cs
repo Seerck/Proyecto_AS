@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SqlClient; /*esto sirve para poder ocupar sql*/
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient; /*esto sirve para poder ocupar sql*/
+ 
 
 namespace Proyecto_AS
 {
@@ -16,10 +16,10 @@ namespace Proyecto_AS
     {
         //wena mati
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
-        //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
+        static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
         //static string inicio_sesion = "Server=PAOLO\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
         //static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
-        static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
+        //static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
         public Form_Añadir_Productos()
         {
@@ -290,6 +290,46 @@ namespace Proyecto_AS
         private void estadocmb_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void fechaingresocmd_TextChanged(object sender, EventArgs e)
+        {
+            string texto = fechaingresocmd.Text.Replace("-","");
+
+            // Formatear la fecha automáticamente
+            if (texto.Length > 2)
+            {
+                texto = texto.Insert(2, "-");  //inserta la posicion 2 por el - 
+            }
+
+            // Actualizar el TextBox con el formato correcto
+            if (texto.Length > 5)
+            {
+                texto = texto.Insert(5, "-");  //inserta la posicion 5 por el - 
+            }
+
+            fechaingresocmd.Text = texto;
+            fechaingresocmd.SelectionStart = texto.Length; // Mantener el cursor al final
+        }
+
+        private void fecha_vencimientocmd_TextChanged(object sender, EventArgs e)
+        {
+            string texto = fecha_vencimientocmd.Text.Replace("-", "");
+
+            // Formatear la fecha automáticamente
+            if (texto.Length > 2)
+            {
+                texto = texto.Insert(2, "-");  //inserta la posicion 2 por el - 
+            }
+
+            // Actualizar el TextBox con el formato correcto
+            if (texto.Length > 5)
+            {
+                texto = texto.Insert(5, "-");  //inserta la posicion 5 por el - 
+            }
+
+            fecha_vencimientocmd.Text = texto;
+            fecha_vencimientocmd.SelectionStart = texto.Length; // Mantener el cursor al final
         }
     }
 }

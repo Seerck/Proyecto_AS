@@ -92,6 +92,7 @@
             this.fechaingresocmd.Name = "fechaingresocmd";
             this.fechaingresocmd.Size = new System.Drawing.Size(261, 22);
             this.fechaingresocmd.TabIndex = 6;
+            this.fechaingresocmd.TextChanged += new System.EventHandler(this.fechaingresocmd_TextChanged);
             this.fechaingresocmd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fechaingresocmd_KeyPress);
             // 
             // btnañadir
@@ -253,6 +254,7 @@
             this.fecha_vencimientocmd.Name = "fecha_vencimientocmd";
             this.fecha_vencimientocmd.Size = new System.Drawing.Size(261, 22);
             this.fecha_vencimientocmd.TabIndex = 26;
+            this.fecha_vencimientocmd.TextChanged += new System.EventHandler(this.fecha_vencimientocmd_TextChanged);
             this.fecha_vencimientocmd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_fechacaducidad_KeyPress);
             // 
             // Form_Añadir_Productos
