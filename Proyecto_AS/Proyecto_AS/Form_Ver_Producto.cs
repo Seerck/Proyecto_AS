@@ -47,5 +47,61 @@ namespace Proyecto_AS
         {
 
         }
+
+        private void BtnBuscar_Click(object sender, EventArgs e)
+        {
+                // Tu cadena de conexión
+                string connectionString = "Data Source=DESKTOP-5RJ2UO2\\SQLEXPRESS;Initial Catalog=BD_AS;User ID=sa;Password=12345678;";
+
+            // Consulta SQL para buscar los productos por nombre
+            string query = "SELECT Nombre, Tipo, Cantidad, Precio, Caducidad, Ubicacion, FechaIngreso, Estado, NivelEstante FROM Productos WHERE(Nombre LIKE @NombreProducto  AND Estado) = ";Habilitado;";
+
+            // Obtener el valor que el usuario ingresó en el TextBox
+            string Nombre = TxtNombre.Text;
+
+                try
+                {
+                    // Validar que el TextBox no esté vacío
+                    if (string.IsNullOrWhiteSpace(Nombre))
+                    {
+                        MessageBox.Show("Por favor, ingresa un nombre de producto para buscar.");
+                        return;
+                    }
+
+                    // Crear la conexión a la base de datos
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        // Abrir la conexión
+                        connection.Open();
+
+                        // Crear el comando SQL
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            // Agregar el parámetro con el valor de búsqueda
+                            command.Parameters.AddWithValue("Nombre", "%" + TxtNombre + "%");
+
+                            // Crear un adaptador de datos para llenar el DataGridView
+                            SqlDataAdapter adapter = new SqlDataAdapter(command);
+
+                            // Crear un DataTable para almacenar los resultados
+                            DataTable dataTable = new DataTable();
+
+                            // Llenar el DataTable con los datos de la consulta
+                            adapter.Fill(dataTable);
+
+                            // Asignar el DataTable al DataGridView
+                            dataGridView1.DataSource = dataTable;
+                        }
+
+                        // Cerrar la conexión
+                        connection.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Mostrar un mensaje si ocurre un error
+                    MessageBox.Show("Error al buscar los productos, intente de nuevo.: " + ex.Message);
+                }
+            }
+        }
     }
-}

@@ -286,5 +286,10 @@ namespace Proyecto_AS
                 e.Handled = true;  // Cancela el evento si no es un número, "-", o tecla de control
             }
         }
+
+        private void estadocmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
