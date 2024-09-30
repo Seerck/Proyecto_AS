@@ -23,17 +23,20 @@ namespace Proyecto_AS
 
         private void Form_Añadir_Usuario_Load(object sender, EventArgs e)
         {
-            consulta_usuario();
+        
         }
 
         public void consulta_usuario()
         {
             conectar.Open(); //abrimos la conexion a la bd
-            SqlCommand comando = new SqlCommand("SELECT * FROM USUARIO", conectar); //creamos la consulta sql
+            //SqlCommand comando = new SqlCommand("SELECT * FROM USUARIO WHERE Nombre LIKE '" + txtUsuario.Text + "%' AND Contraseña LIKE '" + txtContraseña.Text + "%' OR TipoUsuario LIKE '" + cmbTipoUsuario.Text + "%' AND TipoUsuario <> 'Seleccionar'", conectar);
+            SqlCommand comando = new SqlCommand("SELECT * FROM USUARIO WHERE Nombre LIKE '" + txtbuscar.Text + "%'", conectar); //creamos la consulta sql
             SqlDataAdapter dato = new SqlDataAdapter(comando); //ejecutamos la consulta de sql
             DataTable dt = new DataTable(); //creamos una tabla c#
             dato.Fill(dt); //rellenamos la tabla de c# con los datos obtenido al ejecutar la linea sql
             dataGridView1.DataSource = dt; //motramos los datos en el datagriedview
+            
+            txtbuscar.Text = "";
 
             conectar.Close(); //cerramos la conexion a la bd
         }
@@ -72,7 +75,6 @@ namespace Proyecto_AS
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             sp_agregar();
-            consulta_usuario();
             limpiar_campos();
         }
         //aqui se almacenan los codigos de keypress de los txt usuario/contraseña
@@ -107,6 +109,24 @@ namespace Proyecto_AS
                 e.Handled = true;
             }
         }
+        private void txtbuscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Obtener el código ASCII del carácter presionado
+            int asciiCode = (int)e.KeyChar;
+
+            // Permitir solo letras del abecedario (códigos ASCII entre 65-90 para mayúsculas y 97-122 para minúsculas y 8 para la tecla de borrar y 32 para el espacio)
+            if (!((asciiCode >= 65 && asciiCode <= 90) || (asciiCode >= 97 && asciiCode <= 122) || asciiCode == 8 || asciiCode == 32))
+            {
+                // Si el carácter no es una letra, se cancela la entrada
+                e.Handled = true;
+            }
+        }
         #endregion
+
+        private void btn_buscar_Click(object sender, EventArgs e)
+        {
+            consulta_usuario();
+        }
+
     }
 }

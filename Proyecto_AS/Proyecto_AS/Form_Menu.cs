@@ -126,8 +126,14 @@ namespace Proyecto_AS
 
         private void btnCerraSesion_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            new Form_login().Show();
+            //creamos una variable que contendra el resultado del mensaje ("si" o "no")
+            DialogResult = MessageBox.Show("¿Desea volver al login?", "confirmacion", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+
+            if(DialogResult == DialogResult.Yes) //si el resultado de la variable es "si"
+            {
+            this.Hide(); //cerramos el formulario actual
+            new Form_login().Show(); //mostramor el form de login
+            }
         }
 
         private void panelChildForm_Paint(object sender, PaintEventArgs e)

@@ -328,7 +328,7 @@ namespace Proyecto_AS
                 texto = texto.Insert(5, "-");  //inserta la posicion 5 por el - 
             }
 
-            fecha_vencimientocmd.Text = texto;
+            fecha_vencimientocmd.Text = texto; 
             fecha_vencimientocmd.SelectionStart = texto.Length; // Mantener el cursor al final
         }
     }

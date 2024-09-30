@@ -15,9 +15,9 @@ namespace Proyecto_AS
     {
         //wena mati
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
-        //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
+        static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
         //static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
-        static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
+        //static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         //static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
 
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
@@ -121,7 +121,13 @@ namespace Proyecto_AS
 
         private void txtSalir_Click(object sender, EventArgs e)
         {
+            //creamos una variable que contendra el resultado del mensaje ("si" o "no")
+            DialogResult = MessageBox.Show("¿Desea salir del programa?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (DialogResult == DialogResult.Yes) //si el resultado de la variable es "si"
+            {
             Application.Exit();  //cerramos todos los formularios en conjunto a la aplicacion
+            }
         }
     }
 }
