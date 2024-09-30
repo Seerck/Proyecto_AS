@@ -45,19 +45,19 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.Color.DarkSlateGray;
-            this.dataGridView1.Location = new System.Drawing.Point(7, 8);
+            this.dataGridView1.Location = new System.Drawing.Point(11, 10);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(609, 272);
+            this.dataGridView1.Size = new System.Drawing.Size(602, 255);
             this.dataGridView1.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(23, 308);
+            this.label1.Location = new System.Drawing.Point(13, 310);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(124, 16);
@@ -68,7 +68,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(51, 356);
+            this.label3.Location = new System.Drawing.Point(41, 358);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(92, 16);
@@ -77,7 +77,7 @@
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(151, 308);
+            this.txtUsuario.Location = new System.Drawing.Point(141, 310);
             this.txtUsuario.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtUsuario.MaxLength = 25;
             this.txtUsuario.Name = "txtUsuario";
@@ -87,7 +87,7 @@
             // 
             // txtContraseña
             // 
-            this.txtContraseña.Location = new System.Drawing.Point(151, 356);
+            this.txtContraseña.Location = new System.Drawing.Point(141, 358);
             this.txtContraseña.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtContraseña.MaxLength = 25;
             this.txtContraseña.Name = "txtContraseña";
@@ -99,7 +99,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(323, 308);
+            this.label5.Location = new System.Drawing.Point(313, 310);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(99, 16);
@@ -113,7 +113,7 @@
             "usuario",
             "super-usuario",
             "administrador"});
-            this.cmbTipoUsuario.Location = new System.Drawing.Point(426, 304);
+            this.cmbTipoUsuario.Location = new System.Drawing.Point(416, 306);
             this.cmbTipoUsuario.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbTipoUsuario.Name = "cmbTipoUsuario";
             this.cmbTipoUsuario.Size = new System.Drawing.Size(158, 21);
