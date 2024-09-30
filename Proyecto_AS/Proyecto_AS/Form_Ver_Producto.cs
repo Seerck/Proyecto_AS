@@ -14,8 +14,8 @@ namespace Proyecto_AS
     public partial class Form_Ver_Producto : Form
     {
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
-        static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;"; 
-        //static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
+        //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;"; 
+        static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
         public Form_Ver_Producto()
         {
@@ -50,9 +50,6 @@ namespace Proyecto_AS
 
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
-                // Tu cadena de conexión
-                //string connectionString = "Data Source=DESKTOP-5RJ2UO2\\SQLEXPRESS;Initial Catalog=BD_AS;User ID=sa;Password=12345678;";
-            string connectionString = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
             // Consulta SQL para buscar los productos por nombre
             string query = "SELECT Nombre, Tipo, Cantidad, Precio, Caducidad, Ubicacion, FechaIngreso, Estado, NivelEstante FROM Productos WHERE(Nombre LIKE @NombreProducto) AND Estado = 'Habilitado'";
 
@@ -69,7 +66,7 @@ namespace Proyecto_AS
                     }
 
                     // Crear la conexión a la base de datos
-                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    using (SqlConnection connection = new SqlConnection(inicio_sesion))
                     {
                         // Abrir la conexión
                         connection.Open();
