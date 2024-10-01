@@ -16,9 +16,9 @@ namespace Proyecto_AS
     {
         //wena mati
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
-        static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
+        //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
         //static string inicio_sesion = "Server=Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
-        //static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
+        static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
         //static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
         public Form_Añadir_Productos()
@@ -39,16 +39,28 @@ namespace Proyecto_AS
         public void insertar()
         {
             if (nombrecmd.Text != "" && cmdtipo.SelectedIndex > -1  && txt_cantidad.Text != "" && txt_precio.Text != "" && ubicacioncmd.Text != "" &&
-                fechaingresocmd.Text !=  "" && fecha_vencimientocmd.Text != "" && estantecmd.Text != "" && estadocmb.SelectedIndex > -1 )
+                fechaingresocmd.Text !=  ""  && estantecmd.Text != "" && estadocmb.SelectedIndex > -1 )
             {
-                string cmd = "INSERT INTO PRODUCTO (Nombre, Tipo, Cantidad, Precio, Caducidad, Ubicacion, FechaIngreso,  Estado, NivelEstante) " +
-                     "VALUES ('" + nombrecmd.Text + "','" + cmdtipo.Text + "', '" + txt_cantidad.Text + "','" + txt_precio.Text + "','" + fecha_vencimientocmd.Text  + "','" + ubicacioncmd.Text + "', '" + fechaingresocmd.Text + "','" + estadocmb.Text + "', '" + estantecmd.Text + "')";
+                string caducidadValue = string.IsNullOrWhiteSpace(fecha_vencimientocmd.Text) ? "NULL" : "'" + fecha_vencimientocmd.Text + "'";
+                string cmd = "INSERT INTO PRODUCTO (Nombre, Tipo, Cantidad, Precio, Ubicacion, FechaIngreso,  Estado, NivelEstante) " +
+                     "VALUES ('" + nombrecmd.Text + "','" + cmdtipo.Text + "', '" + txt_cantidad.Text + "','" + txt_precio.Text + "','" + ubicacioncmd.Text + "', '" + fechaingresocmd.Text + "','" + estadocmb.Text + "', '" + estantecmd.Text + "')";
                 SqlCommand sqlCommand = new SqlCommand(cmd, conectar);
                 conectar.Open();
                 sqlCommand.ExecuteNonQuery();
                 conectar.Close();
 
                 MessageBox.Show("Se ha registrado correctamente");
+
+                // Limpiar campos después de registrar
+                nombrecmd.Text = "";
+                cmdtipo.SelectedIndex = -1;
+                txt_cantidad.Text = "";
+                txt_precio.Text = "";
+                ubicacioncmd.Text = "";
+                fechaingresocmd.Text = "";
+                fecha_vencimientocmd.Text = "";
+                estantecmd.Text = "";
+                estadocmb.SelectedIndex = -1;
             }
             else
             {
