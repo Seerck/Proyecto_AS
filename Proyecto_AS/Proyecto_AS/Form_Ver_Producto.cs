@@ -59,29 +59,30 @@ namespace Proyecto_AS
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
 
+            // Obtener los valores de los campos de búsqueda
+            string idProducto = TxtId.Text.Trim();
+            string nombreProducto = TxtNombre.Text.Trim();
+            string tipoProducto = TxtTipo.Text.Trim();
+            string precioProducto = TxtPrecio.Text.Trim();
+            string ubicacionProducto = TxtUbi.Text.Trim();
+            string nivelEstante = TxtNivE.Text.Trim();
+
             // Verificar si todos los campos de texto están vacíos
-            if (string.IsNullOrWhiteSpace(TxtId.Text) &&
-                string.IsNullOrWhiteSpace(TxtNombre.Text) &&
-                string.IsNullOrWhiteSpace(TxtTipo.Text) &&
-                string.IsNullOrWhiteSpace(TxtPrecio.Text) &&
-                string.IsNullOrWhiteSpace(TxtUbi.Text) &&
-                string.IsNullOrWhiteSpace(TxtNivE.Text))
+            if (string.IsNullOrEmpty(idProducto) &&
+                string.IsNullOrEmpty(nombreProducto) &&
+                string.IsNullOrEmpty(tipoProducto) &&
+                string.IsNullOrEmpty(precioProducto) &&
+                string.IsNullOrEmpty(ubicacionProducto) &&
+                string.IsNullOrEmpty(nivelEstante))
             {
                 // Mostrar mensaje si todos los campos están vacíos
                 MessageBox.Show("Debe ingresar al menos un criterio de búsqueda.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // Detener la ejecución si no hay datos ingresados
             }
 
-            // Consulta base a la que se agregarán dinámicamente las condiciones
-            string query = @"SELECT Id, Nombre, Tipo, Cantidad, Precio, Caducidad, Ubicacion, FechaIngreso, Estado, NivelEstante FROM PRODUCTO WHERE 1=1"; // El WHERE 1=1 es una técnica para facilitar la adición de condiciones dinámicas.
-
-            // Obtener los valores de los campos de búsqueda
-            string idProducto = TxtId.Text;
-            string nombreProducto = TxtNombre.Text;
-            string tipoProducto = TxtTipo.Text;
-            string precioProducto = TxtPrecio.Text;
-            string ubicacionProducto = TxtUbi.Text;
-            string nivelEstante = TxtNivE.Text;
+            // Si hay al menos un campo con datos, continuar con la búsqueda
+            string query = @"SELECT Id, Nombre, Tipo, Cantidad, Precio, Caducidad, Ubicacion, FechaIngreso, Estado, NivelEstante 
+                     FROM PRODUCTO WHERE 1=1"; // Consulta base
 
             // Crear una lista de parámetros para los valores que se ingresen
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -121,11 +122,6 @@ namespace Proyecto_AS
             {
                 query += " AND NivelEstante LIKE @NivelEstante";
                 parameters.Add(new SqlParameter("@NivelEstante", "%" + nivelEstante + "%"));
-            }
-
-            {
-                // Mostrar mensaje si todos los campos están vacíos
-                MessageBox.Show("Debe ingresar al menos un criterio de búsqueda.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             try
@@ -168,14 +164,13 @@ namespace Proyecto_AS
                 MessageBox.Show("Error al buscar los productos: " + ex.Message);
             }
         }
-
         private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permitir solo letras, espacios y teclas de control como retroceso (Backspace)
-            if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && !char.IsControl(e.KeyChar))
+            // Permitir solo números y teclas de control como retroceso (Backspace)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;  // Ignora el carácter
-                MessageBox.Show("Solo se permiten letras y espacios en este campo.");
+                MessageBox.Show("Solo se permiten números en este campo.");
             }
         }
 
