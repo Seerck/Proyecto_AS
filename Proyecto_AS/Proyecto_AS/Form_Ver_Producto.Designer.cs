@@ -35,7 +35,7 @@
             this.TxtNombre = new System.Windows.Forms.TextBox();
             this.TxtId = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.cmdtipo = new System.Windows.Forms.ComboBox();
+            this.TxtTipo = new System.Windows.Forms.ComboBox();
             this.TxtUbi = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -97,6 +97,7 @@
             this.TxtNombre.Name = "TxtNombre";
             this.TxtNombre.Size = new System.Drawing.Size(257, 22);
             this.TxtNombre.TabIndex = 5;
+            this.TxtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNombre_KeyPress);
             // 
             // TxtId
             // 
@@ -104,6 +105,7 @@
             this.TxtId.Name = "TxtId";
             this.TxtId.Size = new System.Drawing.Size(82, 22);
             this.TxtId.TabIndex = 6;
+            this.TxtId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // label3
             // 
@@ -114,20 +116,20 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Tipo Producto";
             // 
-            // cmdtipo
+            // TxtTipo
             // 
-            this.cmdtipo.FormattingEnabled = true;
-            this.cmdtipo.Items.AddRange(new object[] {
+            this.TxtTipo.FormattingEnabled = true;
+            this.TxtTipo.Items.AddRange(new object[] {
             "Cosmetico",
             "Ropa",
             "Electronico",
             "Calzado"});
-            this.cmdtipo.Location = new System.Drawing.Point(151, 391);
-            this.cmdtipo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cmdtipo.Name = "cmdtipo";
-            this.cmdtipo.Size = new System.Drawing.Size(257, 24);
-            this.cmdtipo.TabIndex = 25;
-            this.cmdtipo.Text = "Seleccionar";
+            this.TxtTipo.Location = new System.Drawing.Point(151, 391);
+            this.TxtTipo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TxtTipo.Name = "TxtTipo";
+            this.TxtTipo.Size = new System.Drawing.Size(257, 24);
+            this.TxtTipo.TabIndex = 25;
+            this.TxtTipo.Text = "Seleccionar";
             // 
             // TxtUbi
             // 
@@ -135,6 +137,7 @@
             this.TxtUbi.Name = "TxtUbi";
             this.TxtUbi.Size = new System.Drawing.Size(257, 22);
             this.TxtUbi.TabIndex = 27;
+            this.TxtUbi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtUbi_KeyPress);
             // 
             // label4
             // 
@@ -160,6 +163,7 @@
             this.TxtPrecio.Name = "TxtPrecio";
             this.TxtPrecio.Size = new System.Drawing.Size(257, 22);
             this.TxtPrecio.TabIndex = 27;
+            this.TxtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPrecio_KeyPress);
             // 
             // TxtNivE
             // 
@@ -167,6 +171,7 @@
             this.TxtNivE.Name = "TxtNivE";
             this.TxtNivE.Size = new System.Drawing.Size(257, 22);
             this.TxtNivE.TabIndex = 28;
+            this.TxtNivE.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNivE_KeyPress);
             // 
             // label6
             // 
@@ -189,7 +194,7 @@
             this.Controls.Add(this.TxtUbi);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.cmdtipo);
+            this.Controls.Add(this.TxtTipo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.TxtId);
             this.Controls.Add(this.TxtNombre);
@@ -217,7 +222,7 @@
         private System.Windows.Forms.TextBox TxtNombre;
         private System.Windows.Forms.TextBox TxtId;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmdtipo;
+        private System.Windows.Forms.ComboBox TxtTipo;
         private System.Windows.Forms.TextBox TxtUbi;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

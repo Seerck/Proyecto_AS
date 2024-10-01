@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Proyecto_AS
 {
@@ -20,6 +21,13 @@ namespace Proyecto_AS
         public Form_Ver_Producto()
         {
             InitializeComponent();
+
+            // Asignar eventos KeyPress para cada TextBox
+            TxtId.KeyPress += textBoxID_KeyPress;
+            TxtPrecio.KeyPress += TxtPrecio_KeyPress;
+            TxtNombre.KeyPress += TxtNombre_KeyPress;
+            TxtUbi.KeyPress += TxtUbi_KeyPress;
+            TxtNivE.KeyPress += TxtNivE_KeyPress;
         }
 
         private void Form_Ver_Producto_Load(object sender, EventArgs e)
@@ -50,55 +58,165 @@ namespace Proyecto_AS
 
         private void BtnBuscar_Click(object sender, EventArgs e)
         {
-            // Consulta SQL para buscar los productos por nombre
-            string query = "SELECT Nombre, Tipo, Cantidad, Precio, Caducidad, Ubicacion, FechaIngreso, Estado, NivelEstante FROM Productos WHERE(Nombre LIKE @NombreProducto) AND Estado = 'Habilitado'";
 
-            // Obtener el valor que el usuario ingresó en el TextBox
-            string Nombre = TxtNombre.Text;
+            // Verificar si todos los campos de texto están vacíos
+            if (string.IsNullOrWhiteSpace(TxtId.Text) &&
+                string.IsNullOrWhiteSpace(TxtNombre.Text) &&
+                string.IsNullOrWhiteSpace(TxtTipo.Text) &&
+                string.IsNullOrWhiteSpace(TxtPrecio.Text) &&
+                string.IsNullOrWhiteSpace(TxtUbi.Text) &&
+                string.IsNullOrWhiteSpace(TxtNivE.Text))
+            {
+                // Mostrar mensaje si todos los campos están vacíos
+                MessageBox.Show("Debe ingresar al menos un criterio de búsqueda.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Detener la ejecución si no hay datos ingresados
+            }
 
-                try
+            // Consulta base a la que se agregarán dinámicamente las condiciones
+            string query = @"SELECT Id, Nombre, Tipo, Cantidad, Precio, Caducidad, Ubicacion, FechaIngreso, Estado, NivelEstante FROM PRODUCTO WHERE 1=1"; // El WHERE 1=1 es una técnica para facilitar la adición de condiciones dinámicas.
+
+            // Obtener los valores de los campos de búsqueda
+            string idProducto = TxtId.Text;
+            string nombreProducto = TxtNombre.Text;
+            string tipoProducto = TxtTipo.Text;
+            string precioProducto = TxtPrecio.Text;
+            string ubicacionProducto = TxtUbi.Text;
+            string nivelEstante = TxtNivE.Text;
+
+            // Crear una lista de parámetros para los valores que se ingresen
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            // Construir dinámicamente la consulta SQL según los campos que no estén vacíos
+            if (!string.IsNullOrWhiteSpace(idProducto))
+            {
+                query += " AND Id = @Id";
+                parameters.Add(new SqlParameter("@Id", idProducto));
+            }
+
+            if (!string.IsNullOrWhiteSpace(nombreProducto))
+            {
+                query += " AND Nombre LIKE @Nombre";
+                parameters.Add(new SqlParameter("@Nombre", "%" + nombreProducto + "%"));
+            }
+
+            if (!string.IsNullOrWhiteSpace(tipoProducto))
+            {
+                query += " AND Tipo LIKE @Tipo";
+                parameters.Add(new SqlParameter("@Tipo", "%" + tipoProducto + "%"));
+            }
+
+            if (!string.IsNullOrWhiteSpace(precioProducto))
+            {
+                query += " AND Precio = @Precio";
+                parameters.Add(new SqlParameter("@Precio", precioProducto));
+            }
+
+            if (!string.IsNullOrWhiteSpace(ubicacionProducto))
+            {
+                query += " AND Ubicacion LIKE @Ubicacion";
+                parameters.Add(new SqlParameter("@Ubicacion", "%" + ubicacionProducto + "%"));
+            }
+
+            if (!string.IsNullOrWhiteSpace(nivelEstante))
+            {
+                query += " AND NivelEstante LIKE @NivelEstante";
+                parameters.Add(new SqlParameter("@NivelEstante", "%" + nivelEstante + "%"));
+            }
+
+            {
+                // Mostrar mensaje si todos los campos están vacíos
+                MessageBox.Show("Debe ingresar al menos un criterio de búsqueda.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            try
+            {
+                // Crear la conexión a la base de datos
+                using (SqlConnection connection = new SqlConnection(inicio_sesion))
                 {
-                    // Validar que el TextBox no esté vacío
-                    if (string.IsNullOrWhiteSpace(Nombre))
-                    {
-                        MessageBox.Show("Por favor, ingresa un nombre de producto para buscar.");
-                        return;
-                    }
+                    // Abrir la conexión
+                    connection.Open();
 
-                    // Crear la conexión a la base de datos
-                    using (SqlConnection connection = new SqlConnection(inicio_sesion))
+                    // Crear el comando SQL
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        // Abrir la conexión
-                        connection.Open();
-
-                        // Crear el comando SQL
-                        using (SqlCommand command = new SqlCommand(query, connection))
+                        // Añadir los parámetros dinámicos a la consulta
+                        foreach (var param in parameters)
                         {
-                            // Agregar el parámetro con el valor de búsqueda
-                            command.Parameters.AddWithValue("Nombre", "%" + TxtNombre + "%");
-
-                            // Crear un adaptador de datos para llenar el DataGridView
-                            SqlDataAdapter adapter = new SqlDataAdapter(command);
-
-                            // Crear un DataTable para almacenar los resultados
-                            DataTable dataTable = new DataTable();
-
-                            // Llenar el DataTable con los datos de la consulta
-                            adapter.Fill(dataTable);
-
-                            // Asignar el DataTable al DataGridView
-                            dataGridView1.DataSource = dataTable;
+                            command.Parameters.Add(param);
                         }
 
-                        // Cerrar la conexión
-                        connection.Close();
+                        // Crear un adaptador de datos para llenar el DataGridView
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+
+                        // Crear un DataTable para almacenar los resultados
+                        DataTable dataTable = new DataTable();
+
+                        // Llenar el DataTable con los datos de la consulta
+                        adapter.Fill(dataTable);
+
+                        // Asignar el DataTable al DataGridView
+                        dataGridView1.DataSource = dataTable;
                     }
+
+                    // Cerrar la conexión
+                    connection.Close();
                 }
-                catch (Exception ex)
-                {
-                    // Mostrar un mensaje si ocurre un error
-                    MessageBox.Show("Error al buscar los productos, intente de nuevo.: " + ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                // Mostrar un mensaje si ocurre un error
+                MessageBox.Show("Error al buscar los productos: " + ex.Message);
+            }
+        }
+
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo letras, espacios y teclas de control como retroceso (Backspace)
+            if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;  // Ignora el carácter
+                MessageBox.Show("Solo se permiten letras y espacios en este campo.");
+            }
+        }
+
+        private void TxtNivE_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir letras, números y teclas de control como retroceso (Backspace)
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;  // Ignora el carácter
+                MessageBox.Show("Solo se permiten letras y números en este campo.");
+            }
+        }
+
+        private void TxtUbi_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir letras, números, espacios y teclas de control como retroceso (Backspace)
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;  // Ignora el carácter
+                MessageBox.Show("Solo se permiten letras, números y espacios en este campo.");
+            }
+        }
+
+        private void TxtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo letras, espacios y teclas de control como retroceso (Backspace)
+            if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;  // Ignora el carácter
+                MessageBox.Show("Solo se permiten letras y espacios en este campo.");
+            }
+        }
+
+        private void TxtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo dígitos, una coma o punto para decimales, y teclas de control
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',' && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;  // Ignora el carácter
+                MessageBox.Show("Solo se permiten números o decimales en este campo.");
             }
         }
     }
+}
