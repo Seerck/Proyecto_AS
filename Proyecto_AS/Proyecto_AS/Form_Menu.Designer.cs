@@ -32,13 +32,11 @@
             this.panel = new System.Windows.Forms.Panel();
             this.btnCerraSesion = new System.Windows.Forms.Button();
             this.panelUsuariosSubMenu = new System.Windows.Forms.Panel();
-            this.btnEliminarUsuario = new System.Windows.Forms.Button();
             this.btnEditarUsuario = new System.Windows.Forms.Button();
             this.btnAñadirUsuario = new System.Windows.Forms.Button();
             this.btnMostarUsuario = new System.Windows.Forms.Button();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.panelProductosSubMenu = new System.Windows.Forms.Panel();
-            this.btnEliminarProductos = new System.Windows.Forms.Button();
             this.btnEditarProductos = new System.Windows.Forms.Button();
             this.btnAñadirProductos = new System.Windows.Forms.Button();
             this.btnMostrarProdutos = new System.Windows.Forms.Button();
@@ -87,10 +85,10 @@
             this.btnCerraSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerraSesion.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnCerraSesion.ForeColor = System.Drawing.Color.LightGray;
-            this.btnCerraSesion.Location = new System.Drawing.Point(0, 555);
+            this.btnCerraSesion.Location = new System.Drawing.Point(0, 522);
             this.btnCerraSesion.Name = "btnCerraSesion";
             this.btnCerraSesion.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnCerraSesion.Size = new System.Drawing.Size(229, 45);
+            this.btnCerraSesion.Size = new System.Drawing.Size(250, 45);
             this.btnCerraSesion.TabIndex = 5;
             this.btnCerraSesion.Text = "Cerrar Sesion";
             this.btnCerraSesion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -100,33 +98,14 @@
             // panelUsuariosSubMenu
             // 
             this.panelUsuariosSubMenu.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.panelUsuariosSubMenu.Controls.Add(this.btnEliminarUsuario);
             this.panelUsuariosSubMenu.Controls.Add(this.btnEditarUsuario);
             this.panelUsuariosSubMenu.Controls.Add(this.btnAñadirUsuario);
             this.panelUsuariosSubMenu.Controls.Add(this.btnMostarUsuario);
             this.panelUsuariosSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelUsuariosSubMenu.Location = new System.Drawing.Point(0, 390);
+            this.panelUsuariosSubMenu.Location = new System.Drawing.Point(0, 345);
             this.panelUsuariosSubMenu.Name = "panelUsuariosSubMenu";
-            this.panelUsuariosSubMenu.Size = new System.Drawing.Size(229, 165);
+            this.panelUsuariosSubMenu.Size = new System.Drawing.Size(250, 123);
             this.panelUsuariosSubMenu.TabIndex = 4;
-            // 
-            // btnEliminarUsuario
-            // 
-            this.btnEliminarUsuario.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.btnEliminarUsuario.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnEliminarUsuario.FlatAppearance.BorderSize = 0;
-            this.btnEliminarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminarUsuario.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnEliminarUsuario.ForeColor = System.Drawing.Color.LightGray;
-            this.btnEliminarUsuario.Location = new System.Drawing.Point(0, 120);
-            this.btnEliminarUsuario.Name = "btnEliminarUsuario";
-            this.btnEliminarUsuario.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnEliminarUsuario.Size = new System.Drawing.Size(229, 40);
-            this.btnEliminarUsuario.TabIndex = 3;
-            this.btnEliminarUsuario.Text = "Eliminar";
-            this.btnEliminarUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminarUsuario.UseVisualStyleBackColor = false;
-            this.btnEliminarUsuario.Click += new System.EventHandler(this.btnEliminarUsuario_Click);
             // 
             // btnEditarUsuario
             // 
@@ -139,7 +118,7 @@
             this.btnEditarUsuario.Location = new System.Drawing.Point(0, 80);
             this.btnEditarUsuario.Name = "btnEditarUsuario";
             this.btnEditarUsuario.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnEditarUsuario.Size = new System.Drawing.Size(229, 40);
+            this.btnEditarUsuario.Size = new System.Drawing.Size(250, 40);
             this.btnEditarUsuario.TabIndex = 2;
             this.btnEditarUsuario.Text = "Editar";
             this.btnEditarUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -157,9 +136,9 @@
             this.btnAñadirUsuario.Location = new System.Drawing.Point(0, 40);
             this.btnAñadirUsuario.Name = "btnAñadirUsuario";
             this.btnAñadirUsuario.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnAñadirUsuario.Size = new System.Drawing.Size(229, 40);
+            this.btnAñadirUsuario.Size = new System.Drawing.Size(250, 40);
             this.btnAñadirUsuario.TabIndex = 1;
-            this.btnAñadirUsuario.Text = "Añadir";
+            this.btnAñadirUsuario.Text = "Añadir/Eliminar";
             this.btnAñadirUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAñadirUsuario.UseVisualStyleBackColor = false;
             this.btnAñadirUsuario.Click += new System.EventHandler(this.btnAñadirUsuario_Click);
@@ -175,7 +154,7 @@
             this.btnMostarUsuario.Location = new System.Drawing.Point(0, 0);
             this.btnMostarUsuario.Name = "btnMostarUsuario";
             this.btnMostarUsuario.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnMostarUsuario.Size = new System.Drawing.Size(229, 40);
+            this.btnMostarUsuario.Size = new System.Drawing.Size(250, 40);
             this.btnMostarUsuario.TabIndex = 0;
             this.btnMostarUsuario.Text = "Mostrar";
             this.btnMostarUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -190,10 +169,10 @@
             this.btnUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUsuarios.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnUsuarios.ForeColor = System.Drawing.Color.LightGray;
-            this.btnUsuarios.Location = new System.Drawing.Point(0, 345);
+            this.btnUsuarios.Location = new System.Drawing.Point(0, 300);
             this.btnUsuarios.Name = "btnUsuarios";
             this.btnUsuarios.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnUsuarios.Size = new System.Drawing.Size(229, 45);
+            this.btnUsuarios.Size = new System.Drawing.Size(250, 45);
             this.btnUsuarios.TabIndex = 3;
             this.btnUsuarios.Text = "Usuarios";
             this.btnUsuarios.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -203,34 +182,14 @@
             // panelProductosSubMenu
             // 
             this.panelProductosSubMenu.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.panelProductosSubMenu.Controls.Add(this.btnEliminarProductos);
             this.panelProductosSubMenu.Controls.Add(this.btnEditarProductos);
             this.panelProductosSubMenu.Controls.Add(this.btnAñadirProductos);
             this.panelProductosSubMenu.Controls.Add(this.btnMostrarProdutos);
             this.panelProductosSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelProductosSubMenu.Location = new System.Drawing.Point(0, 180);
             this.panelProductosSubMenu.Name = "panelProductosSubMenu";
-            this.panelProductosSubMenu.Size = new System.Drawing.Size(229, 165);
+            this.panelProductosSubMenu.Size = new System.Drawing.Size(250, 120);
             this.panelProductosSubMenu.TabIndex = 2;
-            // 
-            // btnEliminarProductos
-            // 
-            this.btnEliminarProductos.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.btnEliminarProductos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnEliminarProductos.FlatAppearance.BorderSize = 0;
-            this.btnEliminarProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminarProductos.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnEliminarProductos.ForeColor = System.Drawing.Color.LightGray;
-            this.btnEliminarProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminarProductos.Location = new System.Drawing.Point(0, 120);
-            this.btnEliminarProductos.Name = "btnEliminarProductos";
-            this.btnEliminarProductos.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnEliminarProductos.Size = new System.Drawing.Size(229, 40);
-            this.btnEliminarProductos.TabIndex = 3;
-            this.btnEliminarProductos.Text = "Eliminar";
-            this.btnEliminarProductos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminarProductos.UseVisualStyleBackColor = false;
-            this.btnEliminarProductos.Click += new System.EventHandler(this.btnEliminarProductos_Click);
             // 
             // btnEditarProductos
             // 
@@ -244,7 +203,7 @@
             this.btnEditarProductos.Location = new System.Drawing.Point(0, 80);
             this.btnEditarProductos.Name = "btnEditarProductos";
             this.btnEditarProductos.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnEditarProductos.Size = new System.Drawing.Size(229, 40);
+            this.btnEditarProductos.Size = new System.Drawing.Size(250, 40);
             this.btnEditarProductos.TabIndex = 2;
             this.btnEditarProductos.Text = "Editar";
             this.btnEditarProductos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -263,7 +222,7 @@
             this.btnAñadirProductos.Location = new System.Drawing.Point(0, 40);
             this.btnAñadirProductos.Name = "btnAñadirProductos";
             this.btnAñadirProductos.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnAñadirProductos.Size = new System.Drawing.Size(229, 40);
+            this.btnAñadirProductos.Size = new System.Drawing.Size(250, 40);
             this.btnAñadirProductos.TabIndex = 1;
             this.btnAñadirProductos.Text = "Añadir";
             this.btnAñadirProductos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -281,7 +240,7 @@
             this.btnMostrarProdutos.Location = new System.Drawing.Point(0, 0);
             this.btnMostrarProdutos.Name = "btnMostrarProdutos";
             this.btnMostrarProdutos.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.btnMostrarProdutos.Size = new System.Drawing.Size(229, 40);
+            this.btnMostrarProdutos.Size = new System.Drawing.Size(250, 40);
             this.btnMostrarProdutos.TabIndex = 0;
             this.btnMostrarProdutos.Text = "Mostrar";
             this.btnMostrarProdutos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -299,7 +258,7 @@
             this.btnProductos.Location = new System.Drawing.Point(0, 135);
             this.btnProductos.Name = "btnProductos";
             this.btnProductos.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnProductos.Size = new System.Drawing.Size(229, 45);
+            this.btnProductos.Size = new System.Drawing.Size(250, 45);
             this.btnProductos.TabIndex = 1;
             this.btnProductos.Text = "Productos";
             this.btnProductos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -314,7 +273,7 @@
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(229, 135);
+            this.panelLogo.Size = new System.Drawing.Size(250, 135);
             this.panelLogo.TabIndex = 0;
             // 
             // label1
@@ -427,13 +386,11 @@
         private System.Windows.Forms.Button btnProductos;
         private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.Panel panelProductosSubMenu;
-        private System.Windows.Forms.Button btnEliminarProductos;
         private System.Windows.Forms.Button btnEditarProductos;
         private System.Windows.Forms.Button btnAñadirProductos;
         private System.Windows.Forms.Button btnMostrarProdutos;
         private System.Windows.Forms.Button btnCerraSesion;
         private System.Windows.Forms.Panel panelUsuariosSubMenu;
-        private System.Windows.Forms.Button btnEliminarUsuario;
         private System.Windows.Forms.Button btnEditarUsuario;
         private System.Windows.Forms.Button btnAñadirUsuario;
         private System.Windows.Forms.Button btnMostarUsuario;

@@ -79,12 +79,6 @@ namespace Proyecto_AS
             openChildForm(new Form_Editar_Productos());
             hideSubMenu();
         }
-
-        private void btnEliminarProductos_Click(object sender, EventArgs e)
-        {
-            openChildForm(new Form_Eliminar_Productos());
-            hideSubMenu();
-        }
         #endregion 
 
         #region subMenuUsuarios
@@ -107,12 +101,6 @@ namespace Proyecto_AS
         private void btnEditarUsuario_Click(object sender, EventArgs e)
         {
             openChildForm(new Form_Editar_Usuario());
-            hideSubMenu();
-        }
-
-        private void btnEliminarUsuario_Click(object sender, EventArgs e)
-        {
-            openChildForm(new Form_Eliminar_Usuario());
             hideSubMenu();
         }
         #endregion

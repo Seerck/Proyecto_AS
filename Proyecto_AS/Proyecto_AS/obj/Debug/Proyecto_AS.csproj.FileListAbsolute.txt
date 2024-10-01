@@ -11,10 +11,8 @@ C:\Users\naxo3\OneDrive\Desktop\Proyecto_AS\Proyecto_AS\Proyecto_AS\obj\Debug\Pr
 C:\Users\naxo3\OneDrive\Desktop\Proyecto_AS\Proyecto_AS\Proyecto_AS\obj\Debug\Proyecto_AS.Form_Añadir_Productos.resources
 C:\Users\naxo3\OneDrive\Desktop\Proyecto_AS\Proyecto_AS\Proyecto_AS\obj\Debug\Proyecto_AS.Form_Ver_Producto.resources
 C:\Users\naxo3\OneDrive\Desktop\Proyecto_AS\Proyecto_AS\Proyecto_AS\obj\Debug\Proyecto_AS.Form_Editar_Productos.resources
-C:\Users\naxo3\OneDrive\Desktop\Proyecto_AS\Proyecto_AS\Proyecto_AS\obj\Debug\Proyecto_AS.Form_Eliminar_Productos.resources
 C:\Users\naxo3\OneDrive\Desktop\Proyecto_AS\Proyecto_AS\Proyecto_AS\obj\Debug\Proyecto_AS.Form_Añadir_Usuario.resources
 C:\Users\naxo3\OneDrive\Desktop\Proyecto_AS\Proyecto_AS\Proyecto_AS\obj\Debug\Proyecto_AS.Form_Editar_Usuario.resources
-C:\Users\naxo3\OneDrive\Desktop\Proyecto_AS\Proyecto_AS\Proyecto_AS\obj\Debug\Proyecto_AS.Form_Eliminar_Usuario.resources
 C:\Users\naxo3\OneDrive\Desktop\Proyecto_AS\Proyecto_AS\Proyecto_AS\obj\Debug\Proyecto_AS.Form_Ver_Usuario.resources
 C:\Users\naxo3\OneDrive\Desktop\Proyecto_AS\Proyecto_AS\Proyecto_AS\obj\Debug\Proyecto_AS.Form_login.resources
 C:\Users\mayer\Desktop\Proyecto_AS\Proyecto_AS\Proyecto_AS\bin\Debug\Proyecto_AS.exe.config

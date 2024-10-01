@@ -70,18 +70,6 @@
     <Compile Include="Form_Editar_Usuario.Designer.cs">
       <DependentUpon>Form_Editar_Usuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Eliminar_Productos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Eliminar_Productos.Designer.cs">
-      <DependentUpon>Form_Eliminar_Productos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form_Eliminar_Usuario.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_Eliminar_Usuario.Designer.cs">
-      <DependentUpon>Form_Eliminar_Usuario.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form_login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,12 +107,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_Editar_Usuario.resx">
       <DependentUpon>Form_Editar_Usuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Eliminar_Productos.resx">
-      <DependentUpon>Form_Eliminar_Productos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form_Eliminar_Usuario.resx">
-      <DependentUpon>Form_Eliminar_Usuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_login.resx">
       <DependentUpon>Form_login.cs</DependentUpon>
