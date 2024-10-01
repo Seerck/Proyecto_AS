@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Proyecto_AS.Form_login;
 
 namespace Proyecto_AS
 {
@@ -21,6 +22,7 @@ namespace Proyecto_AS
         private void Form1_Load(object sender, EventArgs e)
         {
             ocultar_paneles();
+            mostrar_btnUsuarios();
         }
 
         private void ocultar_paneles() /*Creamos un metodo para ocultar los submenus al iniciar*/
@@ -43,6 +45,12 @@ namespace Proyecto_AS
             {
                 hideSubMenu();
                 subMenu.Visible = true;
+
+                if(VG_TipoUsuario.TipoUsuario == "usuario")
+                {
+                    btnAñadirProductos.Visible = false;
+                    btnEditarProductos.Visible = false;
+                }
             }
             else
                 subMenu.Visible = false;
@@ -139,6 +147,14 @@ namespace Proyecto_AS
         private void panelChildForm_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void mostrar_btnUsuarios()
+        {
+            if (VG_TipoUsuario.TipoUsuario == "usuario")
+            {
+                btnUsuarios.Visible = false;
+            }
         }
     }
 
