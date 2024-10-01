@@ -13,11 +13,6 @@ namespace Proyecto_AS
 {
     public partial class Form_Editar_Usuario : Form
     {
-        public static class variable
-        {
-            public static int VAR_id;
-        }
-
         static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         SqlConnection conectar = new SqlConnection(inicio_sesion);
         public Form_Editar_Usuario()
@@ -40,7 +35,7 @@ namespace Proyecto_AS
         {
             if (txt_nombre.Text != "" & txt_pass.Text != "" & cmd_tipo.SelectedIndex > -1)
             {
-               string edit = "UPDATE USUARIO SET Nombre = '" + txt_nombre.Text + "', Contraseña = '" + txt_pass.Text + "', TipoUsuario = '" + cmd_tipo.SelectedItem.ToString() + "' WHERE ID = @ID ";
+               string edit = "UPDATE USUARIO SET Nombre = '" + txt_nombre.Text + "', Contraseña = '" + txt_pass.Text + "', TipoUsuario = '" + cmd_tipo.SelectedItem.ToString() + "' WHERE Id = '" + variable_id + "'";
                 SqlCommand sqlCommand = new SqlCommand(edit, conectar);
                 conectar.Open();
                 sqlCommand.ExecuteNonQuery();
@@ -102,6 +97,8 @@ namespace Proyecto_AS
             conectar.Close();
         }
 
+        string variable_id;
+
         private void btn_extraer_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)  // Comprueba si hay filas seleccionadas
@@ -112,6 +109,8 @@ namespace Proyecto_AS
                 // Asignamos los valores de las columnas a los controles
                 txt_nombre.Text = filaSeleccionada.Cells["Nombre"].Value.ToString();  // Rellena el TextBox del nombre
                 txt_pass.Text = filaSeleccionada.Cells["Contraseña"].Value.ToString();  // Rellena el TextBox de la contraseña
+
+                variable_id = filaSeleccionada.Cells["Id"].Value.ToString();
 
                 // Asegúrate de usar el nombre correcto de la columna
                 string rolSeleccionado = filaSeleccionada.Cells["TipoUsuario"]?.Value?.ToString();  // Extrae el rol, asegurando que no sea nulo
