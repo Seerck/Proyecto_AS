@@ -15,12 +15,16 @@ namespace Proyecto_AS
     {
         //wena mati
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
-        //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
-        static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
+        static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
+        //static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
         //static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         //static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
 
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
+        public class VG_TipoUsuario
+        {
+            public static string TipoUsuario;
+        }
         public Form_login()
         {
             InitializeComponent();
@@ -42,8 +46,10 @@ namespace Proyecto_AS
                 if(dt.Rows.Count == 1)
                 {
                     this.Hide(); //cerramos el formulario
-                    if (dt.Rows[0][0].ToString() =="administrador" | dt.Rows[0][0].ToString() =="usuario")
+                    if (dt.Rows[0][0].ToString() =="administrador" || dt.Rows[0][0].ToString() =="usuario" || dt.Rows[0][0].ToString() == "super-usuario")
                     {
+                        VG_TipoUsuario.TipoUsuario = dt.Rows[0][0].ToString();
+                        Console.WriteLine($"Valor: {VG_TipoUsuario.TipoUsuario}, Tipo: {VG_TipoUsuario.TipoUsuario.GetType()}");
                         new Form_Menu().Show();
                     }
                 }

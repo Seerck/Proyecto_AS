@@ -16,6 +16,7 @@ namespace Proyecto_AS
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
         static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la coneccion*/
+
         public Form_Añadir_Usuario()
         {
             InitializeComponent();
