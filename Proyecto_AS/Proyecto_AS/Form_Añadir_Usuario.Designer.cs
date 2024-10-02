@@ -39,6 +39,9 @@
             this.btn_buscar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtbuscar = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +73,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(55, 441);
+            this.label3.Location = new System.Drawing.Point(54, 416);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(106, 19);
             this.label3.TabIndex = 5;
@@ -78,21 +81,21 @@
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(188, 382);
+            this.txtUsuario.Location = new System.Drawing.Point(184, 382);
             this.txtUsuario.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUsuario.MaxLength = 25;
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(205, 22);
+            this.txtUsuario.Size = new System.Drawing.Size(209, 22);
             this.txtUsuario.TabIndex = 6;
             this.txtUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsuario_KeyPress);
             // 
             // txtContraseña
             // 
-            this.txtContraseña.Location = new System.Drawing.Point(188, 441);
+            this.txtContraseña.Location = new System.Drawing.Point(184, 416);
             this.txtContraseña.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtContraseña.MaxLength = 25;
             this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.Size = new System.Drawing.Size(205, 22);
+            this.txtContraseña.Size = new System.Drawing.Size(209, 22);
             this.txtContraseña.TabIndex = 7;
             this.txtContraseña.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContraseña_KeyPress);
             // 
@@ -100,7 +103,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(417, 382);
+            this.label5.Location = new System.Drawing.Point(45, 449);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(115, 19);
             this.label5.TabIndex = 9;
@@ -113,7 +116,7 @@
             "usuario",
             "super-usuario",
             "administrador"});
-            this.cmbTipoUsuario.Location = new System.Drawing.Point(555, 377);
+            this.cmbTipoUsuario.Location = new System.Drawing.Point(184, 448);
             this.cmbTipoUsuario.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbTipoUsuario.Name = "cmbTipoUsuario";
             this.cmbTipoUsuario.Size = new System.Drawing.Size(209, 24);
@@ -124,7 +127,7 @@
             // 
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregar.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(369, 502);
+            this.btnAgregar.Location = new System.Drawing.Point(225, 525);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(105, 39);
@@ -161,12 +164,42 @@
             this.txtbuscar.TabIndex = 14;
             this.txtbuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbuscar_KeyPress);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(555, 383);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(78, 19);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Eliminar:";
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(639, 381);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(170, 22);
+            this.txtId.TabIndex = 16;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.Location = new System.Drawing.Point(613, 429);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(105, 39);
+            this.btnEliminar.TabIndex = 17;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            // 
             // Form_Añadir_Usuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(832, 567);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.txtId);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtbuscar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_buscar);
@@ -202,5 +235,8 @@
         private System.Windows.Forms.Button btn_buscar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtbuscar;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }

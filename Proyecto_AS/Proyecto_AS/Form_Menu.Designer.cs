@@ -74,7 +74,7 @@
             this.panel.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel.Location = new System.Drawing.Point(0, 0);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(250, 575);
+            this.panel.Size = new System.Drawing.Size(250, 567);
             this.panel.TabIndex = 0;
             // 
             // btnCerraSesion
@@ -85,7 +85,7 @@
             this.btnCerraSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerraSesion.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnCerraSesion.ForeColor = System.Drawing.Color.LightGray;
-            this.btnCerraSesion.Location = new System.Drawing.Point(0, 530);
+            this.btnCerraSesion.Location = new System.Drawing.Point(0, 522);
             this.btnCerraSesion.Name = "btnCerraSesion";
             this.btnCerraSesion.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnCerraSesion.Size = new System.Drawing.Size(250, 45);
@@ -282,7 +282,7 @@
             this.label1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(69, 100);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 16);
+            this.label1.Size = new System.Drawing.Size(103, 19);
             this.label1.TabIndex = 1;
             this.label1.Text = "MI BODEGA";
             // 
@@ -306,7 +306,7 @@
             this.panelChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelChildForm.Location = new System.Drawing.Point(250, 0);
             this.panelChildForm.Name = "panelChildForm";
-            this.panelChildForm.Size = new System.Drawing.Size(834, 575);
+            this.panelChildForm.Size = new System.Drawing.Size(832, 567);
             this.panelChildForm.TabIndex = 1;
             this.panelChildForm.Paint += new System.Windows.Forms.PaintEventHandler(this.panelChildForm_Paint);
             // 
@@ -352,10 +352,10 @@
             // 
             // Form_Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1084, 575);
+            this.ClientSize = new System.Drawing.Size(1082, 567);
             this.Controls.Add(this.panelChildForm);
             this.Controls.Add(this.panel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

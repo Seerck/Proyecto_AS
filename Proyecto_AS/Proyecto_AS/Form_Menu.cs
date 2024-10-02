@@ -46,10 +46,12 @@ namespace Proyecto_AS
                 hideSubMenu();
                 subMenu.Visible = true;
 
+                //ocultamos ciertos botones del submenu productos al rol usuario
                 if(VG_TipoUsuario.TipoUsuario == "usuario")
                 {
-                    btnAñadirProductos.Visible = false;
-                    btnEditarProductos.Visible = false;
+                    btnAñadirProductos.Visible = false; //ocultamos el boton añadir productos
+                    btnEditarProductos.Visible = false; //ocualtamos el boton de editar productos
+                    panelProductosSubMenu.Height = 41;  //cambiamos el tamaño del panel del submenu productos
                 }
             }
             else
@@ -139,9 +141,11 @@ namespace Proyecto_AS
 
         private void mostrar_btnUsuarios()
         {
-            if (VG_TipoUsuario.TipoUsuario == "usuario")
+            //creamos una funcion que oculte el boton de los usuario para los roles de usuario y super-usuario
+            if (VG_TipoUsuario.TipoUsuario == "usuario" || VG_TipoUsuario.TipoUsuario == "super-usuario")
             {
                 btnUsuarios.Visible = false;
+                //Console.WriteLine($"Ancho: {panelProductosSubMenu.Width}, Alto: {panelProductosSubMenu.Height}");
             }
         }
     }
