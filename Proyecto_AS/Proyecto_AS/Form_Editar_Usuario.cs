@@ -41,7 +41,21 @@ namespace Proyecto_AS
                 sqlCommand.ExecuteNonQuery();
                 conectar.Close();
 
+                dataGridView1.DataSource = null;   // Limpiar datos anteriores
+
                 MessageBox.Show("Se han actualizado los datos del usuario");
+
+                conectar.Open();
+                string consulta = "SELECT * FROM USUARIO WHERE Id = '" + variable_id + "'";
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conectar); // Ejecutamos la consulta con SqlDataAdapter
+                DataTable dt = new DataTable();
+                adaptador.Fill(dt);
+                conectar.Close();
+
+                dataGridView1.DataSource = null;   // Limpiar datos anteriores
+                dataGridView1.DataSource = dt;     // Asignar los nuevos datos
+                dataGridView1.Refresh();           // Forzar refresco
             }
             else
             {
@@ -52,7 +66,7 @@ namespace Proyecto_AS
 
         private void Form_Editar_Usuario_Load(object sender, EventArgs e)
         {
-            consulta_usuario();
+            //consulta_usuario();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -63,7 +77,7 @@ namespace Proyecto_AS
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //consulta_usuario();
+            
         }   
 
         private void btn_buscar_Click(object sender, EventArgs e)
@@ -136,6 +150,55 @@ namespace Proyecto_AS
             {
                 MessageBox.Show("Por favor, seleccione una fila para extraer los datos.");
             }
+        }
+
+        private void txt_nombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Obtener el código ASCII del carácter presionado
+            int asciiCode = (int)e.KeyChar;
+
+            // Permitir solo letras del abecedario (códigos ASCII entre 65-90 para mayúsculas y 97-122 para minúsculas y 8 para la tecla de borrar y 32 para el espacio)
+            if (!((asciiCode >= 65 && asciiCode <= 90) || (asciiCode >= 97 && asciiCode <= 122) || asciiCode == 8 || asciiCode == 32))
+            {
+                // Si el carácter no es una letra, se cancela la entrada
+                e.Handled = true;
+            }
+        }
+
+        private void txt_pass_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            int asciiCode = (int)e.KeyChar;
+
+            // Permitir letras (A-Z, a-z), números (0-9) y la tecla de borrar (Backspace)
+            // ASCII 8 corresponde a Backspace
+            // Números 0-9: ASCII 48-57
+
+            if (!((asciiCode >= 65 && asciiCode <= 90) ||   // Mayúsculas A-Z
+                  (asciiCode >= 97 && asciiCode <= 122) ||  // Minúsculas a-z
+                  (asciiCode >= 48 && asciiCode <= 57) ||   // Números 0-9
+                  asciiCode == 8))                          // Tecla de borrar (Backspace)
+            {
+                // Si no es una letra, número o Backspace, se cancela la entrada
+                e.Handled = true;
+            }
+        }
+
+        private void txt_buscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Obtener el código ASCII del carácter presionado
+            int asciiCode = (int)e.KeyChar;
+
+            // Permitir solo letras del abecedario (códigos ASCII entre 65-90 para mayúsculas y 97-122 para minúsculas y 8 para la tecla de borrar y 32 para el espacio)
+            if (!((asciiCode >= 65 && asciiCode <= 90) || (asciiCode >= 97 && asciiCode <= 122) || asciiCode == 8 || asciiCode == 32))
+            {
+                // Si el carácter no es una letra, se cancela la entrada
+                e.Handled = true;
+            }
+        }
+
+        private void cmd_tipo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;  // Cancela cualquier tecla presionada, impidiendo que se escriba cualquier carácter
         }
     }
 }
