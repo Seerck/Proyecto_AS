@@ -90,7 +90,7 @@ namespace Proyecto_AS
             }
 
             conectar.Open();
-            string consulta = "SELECT * FROM USUARIO WHERE Nombre = '" + txt_buscar.Text + "'";
+            string consulta = "SELECT * FROM USUARIO WHERE Nombre LIKE '%" + txt_buscar.Text + "%'";
             
             SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conectar); // Ejecutamos la consulta con SqlDataAdapter
             DataTable dt = new DataTable();
@@ -152,6 +152,7 @@ namespace Proyecto_AS
             }
         }
 
+        #region keypress
         private void txt_nombre_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Obtener el código ASCII del carácter presionado
@@ -200,5 +201,6 @@ namespace Proyecto_AS
         {
             e.Handled = true;  // Cancela cualquier tecla presionada, impidiendo que se escriba cualquier carácter
         }
+        #endregion
     }
 }
