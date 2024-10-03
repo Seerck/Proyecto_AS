@@ -90,7 +90,7 @@ namespace Proyecto_AS
             }
 
             conectar.Open();
-            string consulta = "SELECT * FROM USUARIO WHERE Nombre LIKE '%" + txt_buscar.Text + "%'";
+            string consulta = "SELECT * FROM USUARIO WHERE Nombre LIKE '" + txt_buscar.Text + "%'";
             
             SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conectar); // Ejecutamos la consulta con SqlDataAdapter
             DataTable dt = new DataTable();

@@ -130,6 +130,7 @@
             this.TxtTipo.Size = new System.Drawing.Size(257, 24);
             this.TxtTipo.TabIndex = 25;
             this.TxtTipo.Text = "Seleccionar";
+            this.TxtTipo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtTipo_KeyPress);
             // 
             // TxtUbi
             // 

@@ -28,142 +28,9 @@ namespace Proyecto_AS
             TxtNombre.KeyPress += TxtNombre_KeyPress;
             TxtUbi.KeyPress += TxtUbi_KeyPress;
             TxtNivE.KeyPress += TxtNivE_KeyPress;
+            TxtTipo.KeyPress += TxtTipo_KeyPress;
         }
 
-        private void Form_Ver_Producto_Load(object sender, EventArgs e)
-        {
-
-        }
-        public void mostrar_producto()
-        {
-            conectar.Open(); //abrimos la conexion a la bd
-            SqlCommand comando = new SqlCommand("SELECT * FROM PRODUCTO", conectar); //creamos la consulta sql
-            SqlDataAdapter dato = new SqlDataAdapter(comando); //ejecutamos la consulta de sql
-            DataTable dt = new DataTable(); //creamos una tabla c#
-            dato.Fill(dt); //rellenamos la tabla de c# con los datos obtenido al ejecutar la linea sql
-            dataGridView1.DataSource = dt; //motramos los datos en el datagriedview
-
-            conectar.Close(); //cerramos la conexion a la bd
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnBuscar_Click(object sender, EventArgs e)
-        {
-            mostrar_producto(); // Corrección de la llamada
-                                // Obtener los valores de los campos de búsqueda
-            string idProducto = TxtId.Text.Trim();
-            string nombreProducto = TxtNombre.Text.Trim();
-            string tipoProducto = TxtTipo.Text.Trim();
-            string precioProducto = TxtPrecio.Text.Trim();
-            string ubicacionProducto = TxtUbi.Text.Trim();
-            string nivelEstante = TxtNivE.Text.Trim();
-
-            // Verificar si todos los campos de texto están vacíos
-            if (string.IsNullOrEmpty(idProducto) &&
-                string.IsNullOrEmpty(nombreProducto) &&
-                string.IsNullOrEmpty(tipoProducto) &&
-                string.IsNullOrEmpty(precioProducto) &&
-                string.IsNullOrEmpty(ubicacionProducto) &&
-                string.IsNullOrEmpty(nivelEstante))
-            {
-                // Mostrar mensaje si todos los campos están vacíos
-                MessageBox.Show("Debe ingresar al menos un criterio de búsqueda.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Detener la ejecución si no hay datos ingresados
-            }
-
-            // Si hay al menos un campo con datos, continuar con la búsqueda
-            string query = @"SELECT Id, Nombre, Tipo, Cantidad, Precio, Caducidad, Ubicacion, FechaIngreso, Estado, NivelEstante 
-                     FROM PRODUCTO WHERE 1=1"; // Consulta base
-
-            // Crear una lista de parámetros para los valores que se ingresen
-            List<SqlParameter> parameters = new List<SqlParameter>();
-
-            // Construir dinámicamente la consulta SQL según los campos que no estén vacíos
-            if (!string.IsNullOrWhiteSpace(idProducto))
-            {
-                query += " AND Id = @Id";
-                parameters.Add(new SqlParameter("@Id", idProducto));
-            }
-
-            if (!string.IsNullOrWhiteSpace(nombreProducto))
-            {
-                query += " AND Nombre LIKE @Nombre";
-                parameters.Add(new SqlParameter("@Nombre", "%" + nombreProducto + "%"));
-            }
-
-            if (!string.IsNullOrWhiteSpace(tipoProducto))
-            {
-                query += " AND Tipo LIKE @Tipo";
-                parameters.Add(new SqlParameter("@Tipo", "%" + tipoProducto + "%"));
-            }
-
-            if (!string.IsNullOrWhiteSpace(precioProducto))
-            {
-                query += " AND Precio = @Precio";
-                parameters.Add(new SqlParameter("@Precio", precioProducto));
-            }
-
-            if (!string.IsNullOrWhiteSpace(ubicacionProducto))
-            {
-                query += " AND Ubicacion LIKE @Ubicacion";
-                parameters.Add(new SqlParameter("@Ubicacion", "%" + ubicacionProducto + "%"));
-            }
-
-            if (!string.IsNullOrWhiteSpace(nivelEstante))
-            {
-                query += " AND NivelEstante LIKE @NivelEstante";
-                parameters.Add(new SqlParameter("@NivelEstante", "%" + nivelEstante + "%"));
-            }
-
-            try
-            {
-                // Crear la conexión a la base de datos
-                using (SqlConnection connection = new SqlConnection(inicio_sesion))
-                {
-                    // Abrir la conexión
-                    connection.Open();
-
-                    // Crear el comando SQL
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        // Añadir los parámetros dinámicos a la consulta
-                        foreach (var param in parameters)
-                        {
-                            command.Parameters.Add(param);
-                        }
-
-                        // Crear un adaptador de datos para llenar el DataGridView
-                        SqlDataAdapter adapter = new SqlDataAdapter(command);
-
-                        // Crear un DataTable para almacenar los resultados
-                        DataTable dataTable = new DataTable();
-
-                        // Llenar el DataTable con los datos de la consulta
-                        adapter.Fill(dataTable);
-
-                        // Asignar el DataTable al DataGridView
-                        dataGridView1.DataSource = dataTable;
-                    }
-
-                    // Cerrar la conexión
-                    connection.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                // Mostrar un mensaje si ocurre un error
-                MessageBox.Show("Error al buscar los productos: " + ex.Message);
-            }
-        }
         private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Permitir solo números y teclas de control como retroceso (Backspace)
@@ -211,6 +78,123 @@ namespace Proyecto_AS
             {
                 e.Handled = true;  // Ignora el carácter
                 MessageBox.Show("Solo se permiten números o decimales en este campo.");
+            }
+        }
+
+        private void TxtTipo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void Form_Ver_Producto_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnBuscar_Click(object sender, EventArgs e)
+        {
+            // Llamar al método de búsqueda
+            BuscarProductos();
+        }
+
+        private void BuscarProductos()
+        {
+            string idProducto = TxtId.Text;
+            string nombreProducto = TxtNombre.Text;
+            string tipoProducto = TxtTipo.Text;
+            string precioProducto = TxtPrecio.Text;
+            string ubicacionProducto = TxtUbi.Text;
+            string nivelEstante = TxtNivE.Text;
+
+            // Verificar si todos los campos de texto están vacíos
+            if (string.IsNullOrEmpty(idProducto) &&
+                string.IsNullOrEmpty(nombreProducto) &&
+                string.IsNullOrEmpty(tipoProducto) &&
+                string.IsNullOrEmpty(precioProducto) &&
+                string.IsNullOrEmpty(ubicacionProducto) &&
+                string.IsNullOrEmpty(nivelEstante))
+            {
+                MessageBox.Show("Debe ingresar al menos un criterio de búsqueda.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                StringBuilder query = new StringBuilder("SELECT * FROM PRODUCTO WHERE 1=1");
+                List<SqlParameter> parameters = new List<SqlParameter>();
+
+                if (!string.IsNullOrWhiteSpace(idProducto))
+                {
+                    query.Append(" AND Id = @Id");
+                    parameters.Add(new SqlParameter("@Id", idProducto));
+                }
+                if (!string.IsNullOrWhiteSpace(nombreProducto))
+                {
+                    query.Append(" AND Nombre LIKE @Nombre");
+                    parameters.Add(new SqlParameter("@Nombre", "%" + nombreProducto + "%"));
+                }
+                if (!string.IsNullOrWhiteSpace(tipoProducto))
+                {
+                    query.Append(" AND Tipo LIKE @Tipo");
+                    parameters.Add(new SqlParameter("@Tipo", "%" + tipoProducto + "%"));
+                }
+                if (!string.IsNullOrWhiteSpace(precioProducto))
+                {
+                    query.Append(" AND Precio = @Precio");
+                    parameters.Add(new SqlParameter("@Precio", decimal.Parse(precioProducto))); // Conversión a decimal
+                }
+                if (!string.IsNullOrWhiteSpace(ubicacionProducto))
+                {
+                    query.Append(" AND Ubicacion LIKE @Ubicacion");
+                    parameters.Add(new SqlParameter("@Ubicacion", "%" + ubicacionProducto + "%"));
+                }
+                if (!string.IsNullOrWhiteSpace(nivelEstante))
+                {
+                    query.Append(" AND NivelEstante LIKE @NivelEstante");
+                    parameters.Add(new SqlParameter("@NivelEstante", "%" + nivelEstante + "%"));
+                }
+
+                using (SqlConnection connection = new SqlConnection(inicio_sesion))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query.ToString(), connection))
+                    {
+                        foreach (var param in parameters)
+                        {
+                            command.Parameters.Add(param);
+                        }
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+
+                        // Limpiar el DataGridView antes de cargar nuevos datos
+                        dataGridView1.DataSource = null;
+                        dataGridView1.DataSource = dataTable;
+
+                        if (dataTable.Rows.Count == 0)
+                        {
+                            MessageBox.Show("No se encontraron productos con los criterios especificados.");
+                        }
+                    }
+                }
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Error en el formato del precio: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar los productos: " + ex.Message);
             }
         }
     }
