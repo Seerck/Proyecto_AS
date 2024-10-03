@@ -53,7 +53,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.Color.DarkSlateGray;
-            this.dataGridView1.Location = new System.Drawing.Point(8, -48);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 11);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
@@ -74,7 +74,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 362);
+            this.label1.Location = new System.Drawing.Point(24, 408);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(113, 16);
             this.label1.TabIndex = 3;
@@ -84,7 +84,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 328);
+            this.label2.Location = new System.Drawing.Point(24, 374);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 16);
             this.label2.TabIndex = 4;
@@ -93,7 +93,7 @@
             // 
             // TxtNombre
             // 
-            this.TxtNombre.Location = new System.Drawing.Point(151, 359);
+            this.TxtNombre.Location = new System.Drawing.Point(150, 405);
             this.TxtNombre.Name = "TxtNombre";
             this.TxtNombre.Size = new System.Drawing.Size(257, 22);
             this.TxtNombre.TabIndex = 5;
@@ -101,7 +101,7 @@
             // 
             // TxtId
             // 
-            this.TxtId.Location = new System.Drawing.Point(151, 322);
+            this.TxtId.Location = new System.Drawing.Point(150, 368);
             this.TxtId.Name = "TxtId";
             this.TxtId.Size = new System.Drawing.Size(82, 22);
             this.TxtId.TabIndex = 6;
@@ -110,7 +110,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 394);
+            this.label3.Location = new System.Drawing.Point(24, 440);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(92, 16);
             this.label3.TabIndex = 7;
@@ -124,7 +124,7 @@
             "Ropa",
             "Electronico",
             "Calzado"});
-            this.TxtTipo.Location = new System.Drawing.Point(151, 391);
+            this.TxtTipo.Location = new System.Drawing.Point(150, 437);
             this.TxtTipo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TxtTipo.Name = "TxtTipo";
             this.TxtTipo.Size = new System.Drawing.Size(257, 24);
@@ -134,7 +134,7 @@
             // 
             // TxtUbi
             // 
-            this.TxtUbi.Location = new System.Drawing.Point(151, 466);
+            this.TxtUbi.Location = new System.Drawing.Point(150, 512);
             this.TxtUbi.Name = "TxtUbi";
             this.TxtUbi.Size = new System.Drawing.Size(257, 22);
             this.TxtUbi.TabIndex = 27;
@@ -143,7 +143,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 469);
+            this.label4.Location = new System.Drawing.Point(24, 515);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 16);
             this.label4.TabIndex = 26;
@@ -152,7 +152,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 429);
+            this.label5.Location = new System.Drawing.Point(24, 475);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(46, 16);
             this.label5.TabIndex = 26;
@@ -160,7 +160,7 @@
             // 
             // TxtPrecio
             // 
-            this.TxtPrecio.Location = new System.Drawing.Point(151, 429);
+            this.TxtPrecio.Location = new System.Drawing.Point(150, 475);
             this.TxtPrecio.Name = "TxtPrecio";
             this.TxtPrecio.Size = new System.Drawing.Size(257, 22);
             this.TxtPrecio.TabIndex = 27;
@@ -168,7 +168,7 @@
             // 
             // TxtNivE
             // 
-            this.TxtNivE.Location = new System.Drawing.Point(535, 322);
+            this.TxtNivE.Location = new System.Drawing.Point(534, 368);
             this.TxtNivE.Name = "TxtNivE";
             this.TxtNivE.Size = new System.Drawing.Size(257, 22);
             this.TxtNivE.TabIndex = 28;
@@ -177,7 +177,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(431, 325);
+            this.label6.Location = new System.Drawing.Point(430, 371);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(86, 16);
             this.label6.TabIndex = 29;

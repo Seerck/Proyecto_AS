@@ -26,25 +26,69 @@ namespace Proyecto_AS
 
         }
 
-        public void mostrar_usuario()
+        private void btn_buscar_Click(object sender, EventArgs e)
         {
-            conectar.Open(); //abrimos la conexion a la bd
-            SqlCommand comando = new SqlCommand("SELECT * FROM USUARIO", conectar); //creamos la consulta sql
-            SqlDataAdapter dato = new SqlDataAdapter(comando); //ejecutamos la consulta de sql
-            DataTable dt = new DataTable(); //creamos una tabla c#
-            dato.Fill(dt); //rellenamos la tabla de c# con los datos obtenido al ejecutar la linea sql
-            dataGridView1.DataSource = dt; //mostramos los datos en el datagridview
-
-            // Ocultar la columna ID
-            if (dataGridView1.Columns["ID"] != null) // Asegúrate de que la columna existe
-            {
-                dataGridView1.Columns["ID"].Visible = false; // Ocultamos la columna ID
-            }
-
-            conectar.Close(); //cerramos la conexion a la bd
+            BuscarUsuarios();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void BuscarUsuarios()
+        {
+            string nombreUsuario = txt_nombre.Text.Trim();
+            string tipoUsuario = cmd_tipo.Text.Trim();
+
+            // Verificar si ambos campos están vacíos
+            if (string.IsNullOrEmpty(nombreUsuario) && string.IsNullOrEmpty(tipoUsuario))
+            {
+                MessageBox.Show("Debe ingresar un nombre o un tipo de usuario para realizar la búsqueda.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // Crear la consulta base
+                string query = "SELECT Nombre, TipoUsuario FROM USUARIO WHERE 1=1";
+                List<SqlParameter> parametros = new List<SqlParameter>();
+
+                if (!string.IsNullOrEmpty(nombreUsuario))
+                {
+                    query += " AND Nombre = @Nombre";
+                    parametros.Add(new SqlParameter("@Nombre", nombreUsuario));
+                }
+
+                if (!string.IsNullOrEmpty(tipoUsuario))
+                {
+                    query += " AND TipoUsuario LIKE @TipoUsuario";
+                    parametros.Add(new SqlParameter("@TipoUsuario", "%" + tipoUsuario + "%"));
+                }
+
+                // Ejecutar la consulta
+                using (SqlConnection conexion = new SqlConnection(inicio_sesion))
+                {
+                    conexion.Open();
+                    using (SqlCommand comando = new SqlCommand(query, conexion))
+                    {
+                        comando.Parameters.AddRange(parametros.ToArray());
+                        SqlDataAdapter adaptador = new SqlDataAdapter(comando);
+                        DataTable tablaDatos = new DataTable();
+                        adaptador.Fill(tablaDatos);
+
+                        // Mostrar resultados en el DataGridView
+                        dataGridView1.DataSource = tablaDatos;
+
+                        // Verificar si no hay resultados
+                        if (tablaDatos.Rows.Count == 0)
+                        {
+                            MessageBox.Show("No se encontraron usuarios con esos criterios.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar los usuarios: " + ex.Message);
+            }
+        }
+private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
