@@ -88,27 +88,29 @@ namespace Proyecto_AS
                 MessageBox.Show("Por favor, ingrese un nombre para buscar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-
-            conectar.Open();
-            string consulta = "SELECT * FROM USUARIO WHERE Nombre LIKE '" + txt_buscar.Text + "%'";
-            
-            SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conectar); // Ejecutamos la consulta con SqlDataAdapter
-            DataTable dt = new DataTable();
-            adaptador.Fill(dt);
-  
-            if (dt.Rows.Count > 0)  // Verificamos si se encontraron resultados
-            {               
-                dataGridView1.DataSource = dt;  // Si hay resultados, los mostramos en el DataGridView
-            }
-
             else
             {
-                MessageBox.Show("No se encontró ningún usuario con ese nombre.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                dataGridView1.DataSource = null;  // Limpiamos el DataGridView si no encontramos ningun nombre
-            }
+                conectar.Open();
+                string consulta = "SELECT * FROM USUARIO WHERE Nombre LIKE '" + txt_buscar.Text + "%'";
 
-            txt_buscar.Text = "";
-            conectar.Close();
+                SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conectar); // Ejecutamos la consulta con SqlDataAdapter
+                DataTable dt = new DataTable();
+                adaptador.Fill(dt);
+
+                if (dt.Rows.Count > 0)  // Verificamos si se encontraron resultados
+                {
+                    dataGridView1.DataSource = dt;  // Si hay resultados, los mostramos en el DataGridView
+                }
+
+                else
+                {
+                    MessageBox.Show("No se encontró ningún usuario con ese nombre.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridView1.DataSource = null;  // Limpiamos el DataGridView si no encontramos ningun nombre
+                }
+
+                txt_buscar.Text = "";
+                conectar.Close();
+            }
         }
 
         string variable_id;
@@ -117,8 +119,7 @@ namespace Proyecto_AS
         {
             if (dataGridView1.SelectedRows.Count > 0)  // Comprueba si hay filas seleccionadas
             {
-                // Obtenemos la fila seleccionada
-                DataGridViewRow filaSeleccionada = dataGridView1.SelectedRows[0];
+                DataGridViewRow filaSeleccionada = dataGridView1.SelectedRows[0];  // Obtenemos la fila seleccionada
 
                 // Asignamos los valores de las columnas a los controles
                 txt_nombre.Text = filaSeleccionada.Cells["Nombre"].Value.ToString();  // Rellena el TextBox del nombre

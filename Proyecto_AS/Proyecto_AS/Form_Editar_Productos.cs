@@ -38,11 +38,11 @@ namespace Proyecto_AS
 
         public void insertar()
         {
-            if (nombrecmd.Text != "" && cmdtipo.SelectedIndex > -1 && txt_cantidad.Text != "" && txt_precio.Text != "" && ubicacioncmd.Text != "" &&
-                fechaingresocmd.Text != "" && fechasalidacmd.Text != "" && estadocmb.SelectedIndex > -1)
+            if (txt_nombre.Text != "" && cmb_tipo.SelectedIndex > -1 && txt_cantidad.Text != "" && txt_precio.Text != "" && txt_ubicacion.Text != "" &&
+                txt_fecha_i.Text != "" && txt_fecha_v.Text != "" && cmb_estado.SelectedIndex > -1)
             {
                 string cmd = "INSERT INTO PRODUCTO (Nombre, Tipo, Cantidad, Precio, Ubicacion, FechaIngreso, FechaSalida, Estado, NivelEstante) " +
-             "VALUES ('" + nombrecmd.Text + "','" + cmdtipo.Text + "', '" + txt_cantidad.Text + "','" + txt_precio.Text + "','" + ubicacioncmd.Text + "','" + fechaingresocmd.Text + "','" + fechasalidacmd.Text + "','" + estadocmb.Text + "', '" + estantecmd.Text + "')";
+             "VALUES ('" + txt_nombre.Text + "','" + cmb_tipo.Text + "', '" + txt_cantidad.Text + "','" + txt_precio.Text + "','" + txt_ubicacion.Text + "','" + txt_fecha_i.Text + "','" + txt_fecha_v.Text + "','" + cmb_estado.Text + "', '" + txt_nivel.Text + "')";
                 SqlCommand sqlCommand = new SqlCommand(cmd, conectar);
                 conectar.Open();
                 sqlCommand.ExecuteNonQuery();
@@ -159,6 +159,88 @@ namespace Proyecto_AS
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             consultar();
+
+        }
+
+        string variable_id;
+
+        private void btn_extraer_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)  // Comprueba si hay filas seleccionadas
+            {
+                DataGridViewRow filaSeleccionada = dataGridView1.SelectedRows[0];  // Obtenemos la fila seleccionada
+
+                // Asignamos los valores de las columnas a los controles
+                variable_id = filaSeleccionada.Cells["Id"].Value.ToString();
+                txt_nombre.Text = filaSeleccionada.Cells["Nombre"].Value.ToString();
+                string tipoSeleccionado = filaSeleccionada.Cells["Tipo"]?.Value?.ToString();
+                
+                if (!string.IsNullOrEmpty(tipoSeleccionado))
+                {
+                    cmb_tipo.SelectedItem = tipoSeleccionado;
+                }
+                else
+                {
+                    MessageBox.Show("El tipo no esta registrado correctamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                txt_cantidad.Text = filaSeleccionada.Cells["Cantidad"].Value?.ToString();
+                txt_precio.Text = filaSeleccionada.Cells["Precio"].Value?.ToString();
+                txt_ubicacion.Text = filaSeleccionada.Cells["Ubicacion"].Value?.ToString();
+                txt_fecha_i.Text = filaSeleccionada.Cells["FechaIngreso"].Value?.ToString();
+                txt_fecha_v.Text = filaSeleccionada.Cells["Caducidad"].Value?.ToString();
+                txt_nivel.Text = filaSeleccionada.Cells["NivelEstante"].Value?.ToString();
+
+                string tipoEstado = filaSeleccionada.Cells["Estado"]?.Value?.ToString();
+                if (!string.IsNullOrEmpty(tipoEstado))
+                {
+                    cmb_estado.SelectedItem = tipoSeleccionado;
+                }
+                else
+                {
+                    MessageBox.Show("El estado no esta correctamente guardado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione una fila para extraer los datos.");
+            }
+        }
+
+        private void btn_buscar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txt_nombre.Text) || cmb_tipo.SelectedItem == null)
+            {
+                MessageBox.Show("Por favor, ingrese el nombre y tipo de producto.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            else
+            {
+                conectar.Open();
+                string consulta = "SELECT * FROM PRODUCTO WHERE Nombre LIKE '" + txt_nombre.Text + "%' AND Tipo = '" + cmb_tipo.SelectedItem.ToString() + "'";
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conectar); // Ejecutamos la consulta con SqlDataAdapter
+                DataTable dt = new DataTable();
+                adaptador.Fill(dt);
+
+                if (dt.Rows.Count > 0)  // Verificamos si se encontraron resultados
+                {
+                    dataGridView1.DataSource = dt;  // Si hay resultados, los mostramos en el DataGridView
+                }
+
+                else
+                {
+                    MessageBox.Show("No se encontró ningún producto con ese nombre.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridView1.DataSource = null;  // Limpiamos el DataGridView si no encontramos ningun nombre
+                }
+
+                txt_nombre.Text = "";
+                cmb_tipo.SelectedIndex = -1;
+
+                conectar.Close();
+            }
 
         }
     }
