@@ -74,6 +74,7 @@
             this.cmd_tipo.Size = new System.Drawing.Size(205, 24);
             this.cmd_tipo.TabIndex = 21;
             this.cmd_tipo.Text = "Seleccioonar";
+            this.cmd_tipo.SelectedIndexChanged += new System.EventHandler(this.cmd_tipo_SelectedIndexChanged);
             // 
             // txt_nombre
             // 
@@ -82,6 +83,7 @@
             this.txt_nombre.Name = "txt_nombre";
             this.txt_nombre.Size = new System.Drawing.Size(205, 22);
             this.txt_nombre.TabIndex = 20;
+            this.txt_nombre.TextChanged += new System.EventHandler(this.txt_nombre_TextChanged);
             // 
             // label1
             // 
