@@ -26,7 +26,7 @@ namespace Proyecto_AS
 
         private void Form_Ver_Producto_Load(object sender, EventArgs e)
         {
-            BtnBuscar.Enabled = false;
+            //BtnBuscar.Enabled = false;
         }
 
         private void validarCampos()
@@ -38,11 +38,11 @@ namespace Proyecto_AS
 
         private void TxtNombre_TextChanged(object sender, EventArgs e)
         {
-            validarCampos();
+            //validarCampos();
         }
         private void TxtTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            validarCampos();
+            //validarCampos();
         }
 
         private void TxtNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -75,48 +75,49 @@ namespace Proyecto_AS
 
         private void BuscarProductos()
         {
+            // Validar que se haya seleccionado una opción válida
+            if (TxtTipo.SelectedIndex == -1)
+            {
+                MessageBox.Show("Por favor, selecciona una opción válida.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             try
             {
-                StringBuilder query = new StringBuilder("SELECT * FROM PRODUCTO WHERE 1=1");
-                List<SqlParameter> parameters = new List<SqlParameter>();
-
-                if (!string.IsNullOrWhiteSpace(TxtNombre.Text))
+                // Usamos un bloque using para asegurar que la conexión se cierra correctamente
+                using (SqlConnection conectar = new SqlConnection(inicio_sesion))
                 {
-                    query.Append(" AND Nombre LIKE @Nombre");
-                    parameters.Add(new SqlParameter("@Nombre", "%" + TxtNombre.Text + "%"));
+
+                conectar.Open();
+
+                // Consulta usando parámetros para evitar inyección de SQL
+                string consulta = "SELECT * FROM PRODUCTO WHERE Nombre LIKE '" + TxtNombre.Text + "%' AND Tipo = '" + TxtTipo.SelectedItem.ToString() + "'";
+
+                using (SqlCommand comando = new SqlCommand(consulta, conectar))
+                {
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conectar); // Ejecutamos la consulta con SqlDataAdapter
+                DataTable dt = new DataTable();
+                adaptador.Fill(dt);
+
+                if (dt.Rows.Count > 0)  // Verificamos si se encontraron resultados
+                {
+                    dataGridView1.DataSource = dt;  // Si hay resultados, los mostramos en el DataGridView
                 }
-                if (!string.IsNullOrWhiteSpace(TxtTipo.Text))
+
+                else
                 {
-                    query.Append(" AND Tipo LIKE @Tipo");
-                    parameters.Add(new SqlParameter("@Tipo", "%" + TxtTipo.Text + "%"));
-                }
-
-                using (SqlConnection connection = new SqlConnection(inicio_sesion))
-                {
-                    connection.Open();
-                    using (SqlCommand command = new SqlCommand(query.ToString(), connection))
-                    {
-                        foreach (var param in parameters)
-                        {
-                            command.Parameters.Add(param);
-                        }
-
-                        SqlDataAdapter adapter = new SqlDataAdapter(command);
-                        DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable);
-
-                        // Limpiar el DataGridView antes de cargar nuevos datos
-                        dataGridView1.DataSource = null;
-                        dataGridView1.DataSource = dataTable;
-
-                        if (dataTable.Rows.Count == 0)
-                        {
-                            MessageBox.Show("No hay productos con ese nombre o tipo.");
-                        }
-                    }
+                    MessageBox.Show("No se encontró ningún producto con ese nombre o tipo.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridView1.DataSource = null;  // Limpiamos el DataGridView si no encontramos ningun nombre
                 }
             }
+        }
+
+                TxtNombre.Text = "";
+                TxtTipo.SelectedIndex = -1;
+                conectar.Close();
+            }
+
             catch (Exception ex)
             {
                 MessageBox.Show("Error al buscar los productos: " + ex.Message);

@@ -30,10 +30,10 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
-            this.cmd_tipo = new System.Windows.Forms.ComboBox();
-            this.txt_nombre = new System.Windows.Forms.TextBox();
+            this.CBBTipoU = new System.Windows.Forms.ComboBox();
+            this.TxtNombreU = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btn_buscar = new System.Windows.Forms.Button();
+            this.BtnBuscarU = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,29 +61,29 @@
             this.label5.TabIndex = 22;
             this.label5.Text = "Tipo Usuario:";
             // 
-            // cmd_tipo
+            // CBBTipoU
             // 
-            this.cmd_tipo.FormattingEnabled = true;
-            this.cmd_tipo.Items.AddRange(new object[] {
+            this.CBBTipoU.FormattingEnabled = true;
+            this.CBBTipoU.Items.AddRange(new object[] {
             "usuario",
             "super-usuario",
             "administrador"});
-            this.cmd_tipo.Location = new System.Drawing.Point(224, 436);
-            this.cmd_tipo.Margin = new System.Windows.Forms.Padding(4);
-            this.cmd_tipo.Name = "cmd_tipo";
-            this.cmd_tipo.Size = new System.Drawing.Size(205, 24);
-            this.cmd_tipo.TabIndex = 21;
-            this.cmd_tipo.Text = "Seleccioonar";
-            this.cmd_tipo.SelectedIndexChanged += new System.EventHandler(this.cmd_tipo_SelectedIndexChanged);
+            this.CBBTipoU.Location = new System.Drawing.Point(224, 436);
+            this.CBBTipoU.Margin = new System.Windows.Forms.Padding(4);
+            this.CBBTipoU.Name = "CBBTipoU";
+            this.CBBTipoU.Size = new System.Drawing.Size(205, 24);
+            this.CBBTipoU.TabIndex = 21;
+            this.CBBTipoU.Text = "Seleccioonar";
+            this.CBBTipoU.SelectedIndexChanged += new System.EventHandler(this.cmd_tipo_SelectedIndexChanged);
             // 
-            // txt_nombre
+            // TxtNombreU
             // 
-            this.txt_nombre.Location = new System.Drawing.Point(224, 388);
-            this.txt_nombre.Margin = new System.Windows.Forms.Padding(4);
-            this.txt_nombre.Name = "txt_nombre";
-            this.txt_nombre.Size = new System.Drawing.Size(205, 22);
-            this.txt_nombre.TabIndex = 20;
-            this.txt_nombre.TextChanged += new System.EventHandler(this.txt_nombre_TextChanged);
+            this.TxtNombreU.Location = new System.Drawing.Point(224, 388);
+            this.TxtNombreU.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtNombreU.Name = "TxtNombreU";
+            this.TxtNombreU.Size = new System.Drawing.Size(205, 22);
+            this.TxtNombreU.TabIndex = 20;
+            this.TxtNombreU.TextChanged += new System.EventHandler(this.txt_nombre_TextChanged);
             // 
             // label1
             // 
@@ -95,15 +95,16 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "Nombre Usuario:";
             // 
-            // btn_buscar
+            // BtnBuscarU
             // 
-            this.btn_buscar.Location = new System.Drawing.Point(534, 388);
-            this.btn_buscar.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_buscar.Name = "btn_buscar";
-            this.btn_buscar.Size = new System.Drawing.Size(191, 90);
-            this.btn_buscar.TabIndex = 23;
-            this.btn_buscar.Text = "Buscar";
-            this.btn_buscar.UseVisualStyleBackColor = true;
+            this.BtnBuscarU.Location = new System.Drawing.Point(534, 388);
+            this.BtnBuscarU.Margin = new System.Windows.Forms.Padding(4);
+            this.BtnBuscarU.Name = "BtnBuscarU";
+            this.BtnBuscarU.Size = new System.Drawing.Size(191, 90);
+            this.BtnBuscarU.TabIndex = 23;
+            this.BtnBuscarU.Text = "Buscar";
+            this.BtnBuscarU.UseVisualStyleBackColor = true;
+            this.BtnBuscarU.Click += new System.EventHandler(this.BtnBuscarU_Click);
             // 
             // Form_Ver_Usuario
             // 
@@ -111,10 +112,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(832, 567);
-            this.Controls.Add(this.btn_buscar);
+            this.Controls.Add(this.BtnBuscarU);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.cmd_tipo);
-            this.Controls.Add(this.txt_nombre);
+            this.Controls.Add(this.CBBTipoU);
+            this.Controls.Add(this.TxtNombreU);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -132,9 +133,9 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cmd_tipo;
-        private System.Windows.Forms.TextBox txt_nombre;
+        private System.Windows.Forms.ComboBox CBBTipoU;
+        private System.Windows.Forms.TextBox TxtNombreU;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btn_buscar;
+        private System.Windows.Forms.Button BtnBuscarU;
     }
 }
