@@ -230,6 +230,7 @@
             this.estadocmb.TabIndex = 23;
             this.estadocmb.Text = "Seleccionar";
             this.estadocmb.SelectedIndexChanged += new System.EventHandler(this.estadocmb_SelectedIndexChanged);
+            this.estadocmb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.estadocmb_KeyPress);
             // 
             // cmdtipo
             // 
@@ -245,6 +246,7 @@
             this.cmdtipo.Size = new System.Drawing.Size(257, 24);
             this.cmdtipo.TabIndex = 24;
             this.cmdtipo.Text = "Seleccionar";
+            this.cmdtipo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmdtipo_KeyPress);
             // 
             // fecha_vencimientocmd
             // 
