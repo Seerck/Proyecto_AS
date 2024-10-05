@@ -18,8 +18,8 @@ namespace Proyecto_AS
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
         //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
         //static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
-        static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
-        //static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
+        //static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
+        static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
         public Form_Añadir_Productos()
         {
@@ -356,9 +356,19 @@ namespace Proyecto_AS
 
         private void ubicacioncmd_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            int asciiCode = (int)e.KeyChar;
+
+            // Permitir letras (A-Z, a-z), números (0-9) y la tecla de borrar (Backspace)
+            // ASCII 8 corresponde a Backspace
+            // Números 0-9: ASCII 48-57
+
+            if (!((asciiCode >= 65 && asciiCode <= 90) ||   // Mayúsculas A-Z
+                  (asciiCode >= 97 && asciiCode <= 122) ||  // Minúsculas a-z
+                  (asciiCode >= 48 && asciiCode <= 57) ||   // Números 0-9
+                  asciiCode == 8))                          // Tecla de borrar (Backspace)
             {
-                e.Handled = true; // Cancela la tecla si no es letra, dígito o tecla de control
+                // Si no es una letra, número o Backspace, se cancela la entrada
+                e.Handled = true;
             }
         }
     }

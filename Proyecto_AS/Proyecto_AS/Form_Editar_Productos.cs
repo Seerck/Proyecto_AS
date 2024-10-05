@@ -60,38 +60,66 @@ namespace Proyecto_AS
         private void Form_Editar_Productos_Load(object sender, EventArgs e)
         {
             //consultar();
-            btn_actualizar.Enabled = false;
         }
 
         private void btnañadir_Click(object sender, EventArgs e)
         {
-            if (txt_nombre.Text != "" & cmb_tipo.SelectedIndex > -1 & txt_cantidad.Text != "" & txt_precio.Text != "" & txt_ubicacion.Text != "" & txt_fecha_i.Text != "" & txt_nivel.Text != "" & cmb_estado.SelectedIndex > -1)
+            if (!string.IsNullOrEmpty(variable_id))
             {
-                string edit = "UPDATE PRODUCTO SET Nombre = '" + txt_nombre.Text + "', Tipo = '" + cmb_tipo.SelectedItem.ToString() + "', Cantidad = '" + txt_cantidad.Text + "', Precio = '" + txt_precio.Text + "', Caducidad = '" + txt_fecha_v.Text + "', Ubicacion = '" + txt_ubicacion.Text + "', FechaIngreso = '" + txt_fecha_i.Text + "', Estado = '" + cmb_estado.SelectedItem.ToString() + "', NivelEstante = '" + txt_nivel.Text + "' WHERE Id = '" + variable_id + "'";
-                SqlCommand sqlCommand = new SqlCommand(edit, conectar);
-                conectar.Open();
-                sqlCommand.ExecuteNonQuery();
-                conectar.Close();
+                if (txt_nombre.Text != "" & cmb_tipo.SelectedIndex > -1 & txt_cantidad.Text != "" & txt_precio.Text != "" & txt_ubicacion.Text != "" & txt_fecha_i.Text != "" & txt_nivel.Text != "" & cmb_estado.SelectedIndex > -1)
+                {
+                    string edit = "UPDATE PRODUCTO SET Nombre = '" + txt_nombre.Text + "', Tipo = '" + cmb_tipo.SelectedItem.ToString() + "', Cantidad = '" + txt_cantidad.Text + "', Precio = '" + txt_precio.Text + "', Caducidad = '" + txt_fecha_v.Text + "', Ubicacion = '" + txt_ubicacion.Text + "', FechaIngreso = '" + txt_fecha_i.Text + "', Estado = '" + cmb_estado.SelectedItem.ToString() + "', NivelEstante = '" + txt_nivel.Text + "' WHERE Id = '" + variable_id + "'";
+                    SqlCommand sqlCommand = new SqlCommand(edit, conectar);
+                    conectar.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    conectar.Close();
 
-                dataGridView1.DataSource = null;   // Limpiar datos anteriores
+                    dataGridView1.DataSource = null;   // Limpiar datos anteriores
 
-                MessageBox.Show("Se han actualizado los datos del producto.");
+                    MessageBox.Show("Se han actualizado los datos del producto.");
 
-                conectar.Open();
-                string consulta = "SELECT * FROM PRODUCTO WHERE Id = '" + variable_id + "'";
+                    conectar.Open();
+                    string consulta = "SELECT * FROM PRODUCTO WHERE Id = '" + variable_id + "'";
 
-                SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conectar); // Ejecutamos la consulta con SqlDataAdapter
-                DataTable dt = new DataTable();
-                adaptador.Fill(dt);
-                conectar.Close();
+                    SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conectar); // Ejecutamos la consulta con SqlDataAdapter
+                    DataTable dt = new DataTable();
+                    adaptador.Fill(dt);
+                    conectar.Close();
 
-                dataGridView1.DataSource = null;   // Limpiar datos anteriores
-                dataGridView1.DataSource = dt;     // Asignar los nuevos datos
-                dataGridView1.Refresh();           // Forzar refresco
+                    txt_nombre.Text = "";
+                    txt_cantidad.Text = "";
+                    txt_precio.Text = "";
+                    txt_ubicacion.Text = "";
+                    txt_fecha_i.Text = "";
+                    txt_fecha_v.Text = "";
+                    txt_nivel.Text = "";
+
+                    cmb_estado.SelectedIndex = -1;
+                    cmb_tipo.SelectedIndex = -1;
+
+                    dataGridView1.DataSource = null;   // Limpiar datos anteriores
+                    dataGridView1.DataSource = dt;     // Asignar los nuevos datos
+                    dataGridView1.Refresh();           // Forzar refresco
+                }
+                else
+                {
+                    MessageBox.Show("Falta rellenar todos los campos para realizar el cambio", "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {
-                MessageBox.Show("Falta rellenar todos los campos para realizar el cambio", "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Seleccione algun producto antes de actualizar", "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                txt_nombre.Text = "";
+                txt_cantidad.Text = "";
+                txt_precio.Text = "";
+                txt_ubicacion.Text = "";
+                txt_fecha_i.Text = "";
+                txt_fecha_v.Text = "";
+                txt_nivel.Text = "";
+
+                cmb_estado.SelectedIndex = -1;
+                cmb_tipo.SelectedIndex = -1;
             }
         }
 
