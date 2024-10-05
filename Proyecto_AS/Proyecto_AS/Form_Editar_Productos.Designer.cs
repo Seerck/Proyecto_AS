@@ -83,6 +83,7 @@
             this.cmb_tipo.TabIndex = 43;
             this.cmb_tipo.Text = "Seleccionar";
             this.cmb_tipo.SelectedIndexChanged += new System.EventHandler(this.cmdtipo_SelectedIndexChanged);
+            this.cmb_tipo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_tipo_KeyPress);
             // 
             // cmb_estado
             // 
@@ -97,15 +98,18 @@
             this.cmb_estado.TabIndex = 42;
             this.cmb_estado.Text = "Seleccionar";
             this.cmb_estado.SelectedIndexChanged += new System.EventHandler(this.estadocmb_SelectedIndexChanged);
+            this.cmb_estado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmb_estado_KeyPress);
             // 
             // txt_precio
             // 
             this.txt_precio.Location = new System.Drawing.Point(13, 422);
             this.txt_precio.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_precio.MaxLength = 7;
             this.txt_precio.Name = "txt_precio";
             this.txt_precio.Size = new System.Drawing.Size(194, 20);
             this.txt_precio.TabIndex = 41;
             this.txt_precio.TextChanged += new System.EventHandler(this.txt_precio_TextChanged);
+            this.txt_precio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_precio_KeyPress);
             // 
             // txt_cantidad
             // 
@@ -116,6 +120,7 @@
             this.txt_cantidad.Size = new System.Drawing.Size(197, 20);
             this.txt_cantidad.TabIndex = 40;
             this.txt_cantidad.TextChanged += new System.EventHandler(this.txt_cantidad_TextChanged);
+            this.txt_cantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cantidad_KeyPress);
             // 
             // label9
             // 
@@ -132,10 +137,12 @@
             // 
             this.txt_nivel.Location = new System.Drawing.Point(235, 422);
             this.txt_nivel.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_nivel.MaxLength = 3;
             this.txt_nivel.Name = "txt_nivel";
             this.txt_nivel.Size = new System.Drawing.Size(197, 20);
             this.txt_nivel.TabIndex = 38;
             this.txt_nivel.TextChanged += new System.EventHandler(this.estantecmd_TextChanged);
+            this.txt_nivel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_nivel_KeyPress);
             // 
             // label8
             // 
@@ -244,6 +251,7 @@
             this.txt_fecha_v.Size = new System.Drawing.Size(197, 20);
             this.txt_fecha_v.TabIndex = 28;
             this.txt_fecha_v.TextChanged += new System.EventHandler(this.fechasalidacmd_TextChanged);
+            this.txt_fecha_v.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_fecha_v_KeyPress);
             // 
             // txt_fecha_i
             // 
@@ -253,15 +261,18 @@
             this.txt_fecha_i.Size = new System.Drawing.Size(197, 20);
             this.txt_fecha_i.TabIndex = 27;
             this.txt_fecha_i.TextChanged += new System.EventHandler(this.fechaingresocmd_TextChanged);
+            this.txt_fecha_i.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_fecha_i_KeyPress);
             // 
             // txt_ubicacion
             // 
             this.txt_ubicacion.Location = new System.Drawing.Point(235, 311);
             this.txt_ubicacion.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_ubicacion.MaxLength = 20;
             this.txt_ubicacion.Name = "txt_ubicacion";
             this.txt_ubicacion.Size = new System.Drawing.Size(197, 20);
             this.txt_ubicacion.TabIndex = 26;
             this.txt_ubicacion.TextChanged += new System.EventHandler(this.ubicacioncmd_TextChanged);
+            this.txt_ubicacion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_ubicacion_KeyPress);
             // 
             // txt_nombre
             // 
@@ -272,6 +283,7 @@
             this.txt_nombre.Size = new System.Drawing.Size(197, 20);
             this.txt_nombre.TabIndex = 25;
             this.txt_nombre.TextChanged += new System.EventHandler(this.nombrecmd_TextChanged);
+            this.txt_nombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_nombre_KeyPress);
             // 
             // btn_extraer
             // 

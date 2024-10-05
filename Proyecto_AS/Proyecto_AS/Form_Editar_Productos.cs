@@ -56,14 +56,43 @@ namespace Proyecto_AS
             }
         }
 
+
         private void Form_Editar_Productos_Load(object sender, EventArgs e)
         {
-            consultar();
+            //consultar();
+            btn_actualizar.Enabled = false;
         }
 
         private void btnañadir_Click(object sender, EventArgs e)
         {
+            if (txt_nombre.Text != "" & cmb_tipo.SelectedIndex > -1 & txt_cantidad.Text != "" & txt_precio.Text != "" & txt_ubicacion.Text != "" & txt_fecha_i.Text != "" & txt_nivel.Text != "" & cmb_estado.SelectedIndex > -1)
+            {
+                string edit = "UPDATE PRODUCTO SET Nombre = '" + txt_nombre.Text + "', Tipo = '" + cmb_tipo.SelectedItem.ToString() + "', Cantidad = '" + txt_cantidad.Text + "', Precio = '" + txt_precio.Text + "', Caducidad = '" + txt_fecha_v.Text + "', Ubicacion = '" + txt_ubicacion.Text + "', FechaIngreso = '" + txt_fecha_i.Text + "', Estado = '" + cmb_estado.SelectedItem.ToString() + "', NivelEstante = '" + txt_nivel.Text + "' WHERE Id = '" + variable_id + "'";
+                SqlCommand sqlCommand = new SqlCommand(edit, conectar);
+                conectar.Open();
+                sqlCommand.ExecuteNonQuery();
+                conectar.Close();
 
+                dataGridView1.DataSource = null;   // Limpiar datos anteriores
+
+                MessageBox.Show("Se han actualizado los datos del producto.");
+
+                conectar.Open();
+                string consulta = "SELECT * FROM PRODUCTO WHERE Id = '" + variable_id + "'";
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conectar); // Ejecutamos la consulta con SqlDataAdapter
+                DataTable dt = new DataTable();
+                adaptador.Fill(dt);
+                conectar.Close();
+
+                dataGridView1.DataSource = null;   // Limpiar datos anteriores
+                dataGridView1.DataSource = dt;     // Asignar los nuevos datos
+                dataGridView1.Refresh();           // Forzar refresco
+            }
+            else
+            {
+                MessageBox.Show("Falta rellenar todos los campos para realizar el cambio", "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void estadocmb_SelectedIndexChanged(object sender, EventArgs e)
@@ -113,7 +142,40 @@ namespace Proyecto_AS
 
         private void fechasalidacmd_TextChanged(object sender, EventArgs e)
         {
+            // Desuscribir el evento temporalmente para evitar bucles infinitos
+            txt_fecha_v.TextChanged -= fechasalidacmd_TextChanged;
 
+            // Guardar la posición actual del cursor
+            int cursorPos = txt_fecha_v.SelectionStart;
+
+            // Limpiar cualquier guion para reformatear la cadena correctamente
+            string valor = txt_fecha_v.Text.Replace("-", "");
+
+            // Verificar que solo se manejen hasta 8 caracteres (ddMMyyyy)
+            if (valor.Length > 8)
+            {
+                valor = valor.Substring(0, 8);
+            }
+
+            // Insertar guiones en las posiciones correctas si la longitud lo permite
+            if (valor.Length > 2)
+            {
+                valor = valor.Insert(2, "-");
+            }
+            if (valor.Length > 5)
+            {
+                valor = valor.Insert(5, "-");
+            }
+
+            // Asignar el valor formateado al TextBox
+            txt_fecha_v.Text = valor;
+
+            // Ajustar la posición del cursor después de las modificaciones
+            cursorPos += (valor.Length - txt_fecha_v.Text.Length);
+            txt_fecha_v.SelectionStart = txt_fecha_v.Text.Length;   
+
+            // Re-suscribir el evento TextChanged
+            txt_fecha_v.TextChanged += fechasalidacmd_TextChanged;
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -143,7 +205,36 @@ namespace Proyecto_AS
 
         private void fechaingresocmd_TextChanged(object sender, EventArgs e)
         {
+            // Desuscribir el evento temporalmente para evitar bucles infinitos
+            txt_fecha_i.TextChanged -= fechaingresocmd_TextChanged;
 
+            // Limpiar cualquier guion para re-formatear la cadena correctamente
+            string valor = txt_fecha_i.Text.Replace("-", "");
+
+            // Verificar que solo se manejen hasta 8 caracteres (ddMMyyyy)
+            if (valor.Length > 8)
+            {
+                valor = valor.Substring(0, 8);
+            }
+
+            // Insertar guiones en las posiciones correctas si la longitud lo permite
+            if (valor.Length > 2)
+            {
+                valor = valor.Insert(2, "-");
+            }
+            if (valor.Length > 5)
+            {
+                valor = valor.Insert(5, "-");
+            }
+
+            // Asignar el valor formateado al TextBox
+            txt_fecha_i.Text = valor;
+
+            // Colocar el cursor al final del texto
+            txt_fecha_i.SelectionStart = txt_fecha_i.Text.Length;
+
+            // Re-suscribir el evento TextChanged
+            txt_fecha_i.TextChanged += fechaingresocmd_TextChanged;
         }
 
         private void ubicacioncmd_TextChanged(object sender, EventArgs e)
@@ -194,7 +285,7 @@ namespace Proyecto_AS
                 string tipoEstado = filaSeleccionada.Cells["Estado"]?.Value?.ToString();
                 if (!string.IsNullOrEmpty(tipoEstado))
                 {
-                    cmb_estado.SelectedItem = tipoSeleccionado;
+                    cmb_estado.SelectedItem = tipoEstado;
                 }
                 else
                 {
@@ -242,6 +333,101 @@ namespace Proyecto_AS
                 conectar.Close();
             }
 
+        }
+
+        private void cmb_estado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;  // Cancela cualquier tecla presionada, impidiendo que se escriba cualquier carácter
+        }
+
+        private void cmb_tipo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;  // Cancela cualquier tecla presionada, impidiendo que se escriba cualquier carácter
+        }
+
+        private void txt_fecha_i_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verifica si el carácter es un número o una tecla de control
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Si no es un número ni una tecla de control, se cancela la entrada
+                e.Handled = true;
+            }
+        }
+
+        private void txt_nombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo letras, espacios y teclas de control (Backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && e.KeyChar != ' ')
+            {
+                e.Handled = true;  // Cancela el evento si no es una letra, espacio o tecla de control
+            }
+        }
+
+        private void txt_nivel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            int asciiCode = (int)e.KeyChar;
+
+            // Permitir letras (A-Z, a-z), números (0-9) y la tecla de borrar (Backspace)
+            // ASCII 8 corresponde a Backspace
+            // Números 0-9: ASCII 48-57
+
+            if (!((asciiCode >= 65 && asciiCode <= 90) ||   // Mayúsculas A-Z
+                  (asciiCode >= 97 && asciiCode <= 122) ||  // Minúsculas a-z
+                  (asciiCode >= 48 && asciiCode <= 57) ||   // Números 0-9
+                  asciiCode == 8))                          // Tecla de borrar (Backspace)
+            {
+                // Si no es una letra, número o Backspace, se cancela la entrada
+                e.Handled = true;
+            }
+        }
+
+        private void txt_precio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verifica si el carácter es un número o una tecla de control
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Si no es un número ni una tecla de control, se cancela la entrada
+                e.Handled = true;
+            }
+        }
+
+        private void txt_cantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verifica si el carácter es un número o una tecla de control
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Si no es un número ni una tecla de control, se cancela la entrada
+                e.Handled = true;
+            }
+        }
+
+        private void txt_fecha_v_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Verifica si el carácter es un número o una tecla de control
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                // Si no es un número ni una tecla de control, se cancela la entrada
+                e.Handled = true;
+            }
+        }
+
+        private void txt_ubicacion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            int asciiCode = (int)e.KeyChar;
+
+            // Permitir letras (A-Z, a-z), números (0-9) y la tecla de borrar (Backspace)
+            // ASCII 8 corresponde a Backspace
+            // Números 0-9: ASCII 48-57
+
+            if (!((asciiCode >= 65 && asciiCode <= 90) ||   // Mayúsculas A-Z
+                  (asciiCode >= 97 && asciiCode <= 122) ||  // Minúsculas a-z
+                  (asciiCode >= 48 && asciiCode <= 57) ||   // Números 0-9
+                  asciiCode == 8))                          // Tecla de borrar (Backspace)
+            {
+                // Si no es una letra, número o Backspace, se cancela la entrada
+                e.Handled = true;
+            }
         }
     }
 }
