@@ -353,5 +353,13 @@ namespace Proyecto_AS
         {
             e.Handled = true;  // Cancela cualquier tecla presionada, impidiendo que se escriba cualquier carácter
         }
+
+        private void ubicacioncmd_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetterOrDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Cancela la tecla si no es letra, dígito o tecla de control
+            }
+        }
     }
 }

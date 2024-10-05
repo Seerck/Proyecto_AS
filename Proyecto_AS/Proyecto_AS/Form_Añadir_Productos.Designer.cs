@@ -83,6 +83,7 @@
             this.ubicacioncmd.Name = "ubicacioncmd";
             this.ubicacioncmd.Size = new System.Drawing.Size(261, 22);
             this.ubicacioncmd.TabIndex = 5;
+            this.ubicacioncmd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ubicacioncmd_KeyPress);
             // 
             // fechaingresocmd
             // 
@@ -182,6 +183,7 @@
             // 
             this.estantecmd.Location = new System.Drawing.Point(311, 518);
             this.estantecmd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.estantecmd.MaxLength = 3;
             this.estantecmd.Name = "estantecmd";
             this.estantecmd.Size = new System.Drawing.Size(261, 22);
             this.estantecmd.TabIndex = 18;
