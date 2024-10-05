@@ -93,8 +93,18 @@ namespace Proyecto_AS
                 }
 
                 TxtNombreU.Text = "";
-                CBBTipoU.SelectedIndex = -1;
+                CBBTipoU.Text = "Seleccionar";
                 conectar.Close();
+            }
+        }
+
+        private void TxtNombreU_Keypress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo letras, espacios y teclas de control como retroceso (Backspace)
+            if (!char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;  // Ignora el carácter
+                MessageBox.Show("Solo se permiten letras y espacios en este campo.");
             }
         }
     }

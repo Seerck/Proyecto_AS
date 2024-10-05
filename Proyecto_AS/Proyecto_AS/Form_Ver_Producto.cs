@@ -91,7 +91,7 @@ namespace Proyecto_AS
                 conectar.Open();
 
                 // Consulta usando parámetros para evitar inyección de SQL
-                string consulta = "SELECT * FROM PRODUCTO WHERE Nombre LIKE '" + TxtNombre.Text + "%' AND Tipo = '" + TxtTipo.SelectedItem.ToString() + "'";
+                string consulta = "SELECT * FROM PRODUCTO WHERE Nombre LIKE '" + TxtNombre.Text + "%' AND Tipo = '" + TxtTipo.SelectedItem.ToString() + "' AND Estado = 'habilitado'";
 
                 using (SqlCommand comando = new SqlCommand(consulta, conectar))
                 {

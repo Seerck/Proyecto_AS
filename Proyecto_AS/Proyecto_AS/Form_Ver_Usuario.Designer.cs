@@ -73,17 +73,19 @@
             this.CBBTipoU.Name = "CBBTipoU";
             this.CBBTipoU.Size = new System.Drawing.Size(205, 24);
             this.CBBTipoU.TabIndex = 21;
-            this.CBBTipoU.Text = "Seleccioonar";
+            this.CBBTipoU.Text = "Seleccionar";
             this.CBBTipoU.SelectedIndexChanged += new System.EventHandler(this.cmd_tipo_SelectedIndexChanged);
             // 
             // TxtNombreU
             // 
             this.TxtNombreU.Location = new System.Drawing.Point(224, 388);
             this.TxtNombreU.Margin = new System.Windows.Forms.Padding(4);
+            this.TxtNombreU.MaxLength = 25;
             this.TxtNombreU.Name = "TxtNombreU";
             this.TxtNombreU.Size = new System.Drawing.Size(205, 22);
             this.TxtNombreU.TabIndex = 20;
             this.TxtNombreU.TextChanged += new System.EventHandler(this.txt_nombre_TextChanged);
+            this.TxtNombreU.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNombreU_Keypress);
             // 
             // label1
             // 
