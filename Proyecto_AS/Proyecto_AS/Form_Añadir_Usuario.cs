@@ -14,7 +14,8 @@ namespace Proyecto_AS
     public partial class Form_Añadir_Usuario : Form
     {
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
-        static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
+        static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
+        //static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la coneccion*/
 
         public Form_Añadir_Usuario()
@@ -127,6 +128,18 @@ namespace Proyecto_AS
         {
             e.Handled = true;  // Cancela cualquier tecla presionada, impidiendo que se escriba cualquier carácter
         }
+        private void txtId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            int key = e.KeyChar;
+
+            // Permitir solo números (códigos ASCII 48-57) y la tecla de retroceso (ASCII 8)
+            if (!char.IsDigit(e.KeyChar) && key != 8)
+            {
+                // Evitar que la tecla no deseada se procese
+                e.Handled = true;
+            }
+
+        }
         #endregion
 
         private void btn_buscar_Click(object sender, EventArgs e)
@@ -138,5 +151,29 @@ namespace Proyecto_AS
         {
 
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if(txtId.Text != "")
+            {
+                conectar.Open();
+                SqlCommand comando = new SqlCommand("DELETE FROM USUARIO WHERE Id = '" + txtId.Text +"'",conectar);
+                SqlDataAdapter dato = new SqlDataAdapter(comando);
+                DataTable dt = new DataTable();
+                dato.Fill(dt);
+
+                txtId.Text = "";
+                MessageBox.Show("Usuario eliminado correctamente","INFORMACION",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                conectar.Close();
+
+            }
+
+            else
+            {
+                MessageBox.Show("Porfavor introduzca el id del usuario que desea eliminar", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
     }
 }
