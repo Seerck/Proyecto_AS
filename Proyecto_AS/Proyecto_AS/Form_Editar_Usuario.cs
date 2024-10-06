@@ -203,5 +203,45 @@ namespace Proyecto_AS
             e.Handled = true;  // Cancela cualquier tecla presionada, impidiendo que se escriba cualquier carácter
         }
         #endregion
+
+        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {
+            // Verificar si hay al menos una fila seleccionada
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                DataGridViewRow filaSeleccionada = dataGridView1.SelectedRows[0];  // Obtenemos la fila seleccionada
+
+                // Asignamos los valores de las columnas a los controles, asegurando que no sean nulos
+                txt_nombre.Text = filaSeleccionada.Cells["Nombre"].Value?.ToString() ?? string.Empty;
+                txt_pass.Text = filaSeleccionada.Cells["Contraseña"].Value?.ToString() ?? string.Empty;
+
+                // Guardar el Id, también asegurando que no sea nulo
+                variable_id = filaSeleccionada.Cells["Id"].Value?.ToString() ?? string.Empty;
+
+                // Extraer el rol, asegurando que no sea nulo
+                string rolSeleccionado = filaSeleccionada.Cells["TipoUsuario"]?.Value?.ToString();
+
+                if (!string.IsNullOrEmpty(rolSeleccionado))
+                {
+                    // Establece el rol en el ComboBox
+                    if (cmd_tipo.Items.Contains(rolSeleccionado))
+                    {
+                        cmd_tipo.SelectedItem = rolSeleccionado;  // Establece el valor si existe
+                    }
+                    else
+                    {
+                        MessageBox.Show("El rol seleccionado no está disponible en el ComboBox.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se encontró un rol para el usuario seleccionado.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("No se ha seleccionado ninguna fila.");
+            }
+        }
     }
 }

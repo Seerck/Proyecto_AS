@@ -123,50 +123,6 @@ namespace Proyecto_AS
             }
         }
 
-        private void estadocmb_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_precio_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txt_cantidad_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void estantecmd_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void fechasalidacmd_TextChanged(object sender, EventArgs e)
         {
@@ -200,35 +156,24 @@ namespace Proyecto_AS
 
             // Ajustar la posición del cursor después de las modificaciones
             cursorPos += (valor.Length - txt_fecha_v.Text.Length);
-            txt_fecha_v.SelectionStart = txt_fecha_v.Text.Length;   
+            txt_fecha_v.SelectionStart = txt_fecha_v.Text.Length;
 
             // Re-suscribir el evento TextChanged
             txt_fecha_v.TextChanged += fechasalidacmd_TextChanged;
-        }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
+            if (txt_fecha_v.Text.Length == 10) // El formato esperado es "dd-MM-yyyy"
+            {
+                DateTime fecha;
+                bool esValida = DateTime.TryParseExact(txt_fecha_v.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fecha);
 
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmdtipo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+                if (!esValida)
+                {
+                    MessageBox.Show("Por favor, ingrese una fecha válida y existente.", "Fecha inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_fecha_v.Focus();
+                    txt_fecha_v.SelectAll();
+                    txt_fecha_v.Text = "";
+                }
+            }
         }
 
         private void fechaingresocmd_TextChanged(object sender, EventArgs e)
@@ -263,6 +208,21 @@ namespace Proyecto_AS
 
             // Re-suscribir el evento TextChanged
             txt_fecha_i.TextChanged += fechaingresocmd_TextChanged;
+
+            // Validar la fecha ingresada solo cuando tiene un formato completo
+            if (txt_fecha_i.Text.Length == 10) // El formato esperado es "dd-MM-yyyy"
+            {
+                DateTime fecha;
+                bool esValida = DateTime.TryParseExact(txt_fecha_i.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fecha);
+
+                if (!esValida)
+                {
+                    MessageBox.Show("Por favor, ingrese una fecha válida y existente.", "Fecha inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_fecha_i.Focus();
+                    txt_fecha_i.SelectAll();
+                    txt_fecha_i.Text = "";
+                }
+            }
         }
 
         private void ubicacioncmd_TextChanged(object sender, EventArgs e)
@@ -281,9 +241,8 @@ namespace Proyecto_AS
 
         }
 
-        string variable_id;
-
-        private void btn_extraer_Click(object sender, EventArgs e)
+        #region
+        /*private void btn_extraer_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)  // Comprueba si hay filas seleccionadas
             {
@@ -293,7 +252,7 @@ namespace Proyecto_AS
                 variable_id = filaSeleccionada.Cells["Id"].Value.ToString();
                 txt_nombre.Text = filaSeleccionada.Cells["Nombre"].Value.ToString();
                 string tipoSeleccionado = filaSeleccionada.Cells["Tipo"]?.Value?.ToString();
-                
+
                 if (!string.IsNullOrEmpty(tipoSeleccionado))
                 {
                     cmb_tipo.SelectedItem = tipoSeleccionado;
@@ -325,7 +284,10 @@ namespace Proyecto_AS
             {
                 MessageBox.Show("Por favor, seleccione una fila para extraer los datos.");
             }
-        }
+        }*/
+        #endregion
+
+        string variable_id;
 
         private void btn_buscar_Click(object sender, EventArgs e)
         {
@@ -361,6 +323,49 @@ namespace Proyecto_AS
                 conectar.Close();
             }
 
+        }
+
+        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {           
+            if (dataGridView1.CurrentRow != null) // Verificamos si hay al menos una celda seleccionada
+            {
+                // Obtenemos la fila seleccionada
+                DataGridViewRow filaSeleccionada = dataGridView1.CurrentRow;
+
+                variable_id = filaSeleccionada.Cells["Id"].Value?.ToString();
+                txt_nombre.Text = filaSeleccionada.Cells["Nombre"].Value?.ToString();
+
+                string tipoSeleccionado = filaSeleccionada.Cells["Tipo"]?.Value?.ToString();
+                if (!string.IsNullOrEmpty(tipoSeleccionado))
+                {
+                    cmb_tipo.SelectedItem = tipoSeleccionado;
+                }
+                else
+                {
+                    MessageBox.Show("El tipo no está registrado correctamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                txt_cantidad.Text = filaSeleccionada.Cells["Cantidad"].Value?.ToString();
+                txt_precio.Text = filaSeleccionada.Cells["Precio"].Value?.ToString();
+                txt_ubicacion.Text = filaSeleccionada.Cells["Ubicacion"].Value?.ToString();
+                txt_fecha_i.Text = filaSeleccionada.Cells["FechaIngreso"].Value?.ToString();
+                txt_fecha_v.Text = filaSeleccionada.Cells["Caducidad"].Value?.ToString();
+                txt_nivel.Text = filaSeleccionada.Cells["NivelEstante"].Value?.ToString();
+
+                string tipoEstado = filaSeleccionada.Cells["Estado"]?.Value?.ToString();
+                if (!string.IsNullOrEmpty(tipoEstado))
+                {
+                    cmb_estado.SelectedItem = tipoEstado;
+                }
+                else
+                {
+                    MessageBox.Show("El estado no está correctamente guardado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione una fila para extraer los datos.");
+            }
         }
 
         private void cmb_estado_KeyPress(object sender, KeyPressEventArgs e)
@@ -444,18 +449,87 @@ namespace Proyecto_AS
         {
             int asciiCode = (int)e.KeyChar;
 
-            // Permitir letras (A-Z, a-z), números (0-9) y la tecla de borrar (Backspace)
-            // ASCII 8 corresponde a Backspace
-            // Números 0-9: ASCII 48-57
-
+            // Permitir letras (A-Z, a-z), números (0-9), la tecla de borrar (Backspace) y espacios (ASCII 32)
             if (!((asciiCode >= 65 && asciiCode <= 90) ||   // Mayúsculas A-Z
                   (asciiCode >= 97 && asciiCode <= 122) ||  // Minúsculas a-z
                   (asciiCode >= 48 && asciiCode <= 57) ||   // Números 0-9
-                  asciiCode == 8))                          // Tecla de borrar (Backspace)
+                  asciiCode == 8 ||                         // Tecla de borrar (Backspace)
+                  asciiCode == 32))                         // Espacio (ASCII 32)
             {
-                // Si no es una letra, número o Backspace, se cancela la entrada
+                // Si no es una letra, número, Backspace o espacio, se cancela la entrada
                 e.Handled = true;
             }
         }
+        #region
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmdtipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void estadocmb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_precio_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_cantidad_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void estantecmd_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
+    #endregion
 }
