@@ -18,8 +18,8 @@ namespace Proyecto_AS
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
         //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
         //static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
-        //static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
-        static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
+        static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
+        //static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
         public Form_Añadir_Productos()
         {
@@ -322,6 +322,20 @@ namespace Proyecto_AS
 
             fechaingresocmd.Text = texto;
             fechaingresocmd.SelectionStart = texto.Length; // Mantener el cursor al final
+
+            // Validar la fecha ingresada solo cuando tiene un formato completo
+            if (fechaingresocmd.Text.Length == 10) // El formato esperado es "dd-MM-yyyy"
+            {
+                DateTime fecha;
+                bool esValida = DateTime.TryParseExact(fechaingresocmd.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fecha);
+
+                if (!esValida)
+                {
+                    MessageBox.Show("Por favor, ingrese una fecha válida y existente.", "Fecha inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    fechaingresocmd.Focus();
+                    fechaingresocmd.SelectAll();
+                }
+            }
         }
 
         private void fecha_vencimientocmd_TextChanged(object sender, EventArgs e)
