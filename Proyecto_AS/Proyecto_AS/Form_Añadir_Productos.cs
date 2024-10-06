@@ -18,8 +18,8 @@ namespace Proyecto_AS
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
         //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
         //static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
-        //static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
-        static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
+        static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
+        //static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
         public Form_Añadir_Productos()
         {
@@ -223,7 +223,7 @@ namespace Proyecto_AS
 
         private void Form_Añadir_Productos_Load(object sender, EventArgs e)
         {
-            consultar();
+            //consultar();
         }
 
         private void txt_cantidad_TextChanged(object sender, EventArgs e)
@@ -329,6 +329,14 @@ namespace Proyecto_AS
                 DateTime fecha;
                 bool esValida = DateTime.TryParseExact(fechaingresocmd.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fecha);
 
+                if (esValida)
+                {
+                    if (fecha.Year < 1900 || fecha.Year > DateTime.Now.Year)
+                    {
+                        esValida = false;
+                    }
+                }
+
                 if (!esValida)
                 {
                     MessageBox.Show("Por favor, ingrese una fecha válida y existente.", "Fecha inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -355,20 +363,43 @@ namespace Proyecto_AS
                 texto = texto.Insert(5, "-");  //inserta la posicion 5 por el - 
             }
 
-            fecha_vencimientocmd.Text = texto; 
+            fecha_vencimientocmd.Text = texto;
             fecha_vencimientocmd.SelectionStart = texto.Length; // Mantener el cursor al final
 
-            if (fechaingresocmd.Text.Length == 10) // El formato esperado es "dd-MM-yyyy"
+            if (fecha_vencimientocmd.Text.Length == 10) // El formato esperado es "dd-MM-yyyy"
             {
                 DateTime fecha;
-                bool esValida = DateTime.TryParseExact(fechaingresocmd.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fecha);
+                bool esValida = DateTime.TryParseExact(fecha_vencimientocmd.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fecha);
+
+                if (esValida)
+                {
+                    if (fecha.Year < 1900 || fecha.Year > DateTime.Now.Year)
+                    {
+                        esValida = false;
+                    }
+                }
 
                 if (!esValida)
                 {
                     MessageBox.Show("Por favor, ingrese una fecha válida y existente.", "Fecha inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    fechaingresocmd.Focus();
-                    fechaingresocmd.SelectAll();
-                    fechaingresocmd.Text = "";
+                    fecha_vencimientocmd.Focus();
+                    fecha_vencimientocmd.SelectAll();
+                    fecha_vencimientocmd.Text = "";
+                }
+                else
+                {
+                    // Si la fecha es válida, verifica si la fecha de vencimiento está próxima
+                    TimeSpan diferencia = fecha - DateTime.Now;
+
+                    if (diferencia.Days <= 7 && diferencia.Days >= 0)
+                    {
+                        MessageBox.Show($"La fecha de vencimiento está cerca, quedan {diferencia.Days} día(s).", "Aviso de vencimiento próximo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else if (diferencia.Days < 0)
+                    {
+                        MessageBox.Show("La fecha de vencimiento ya ha pasado.", "Fecha vencida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
                 }
             }
         }
@@ -396,6 +427,46 @@ namespace Proyecto_AS
             {
                 // Si no es una letra, número, Backspace o espacio, se cancela la entrada
                 e.Handled = true;
+            }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_buscar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(nombrecmd.Text) || cmdtipo.SelectedItem == null)
+            {
+                MessageBox.Show("Por favor, ingrese el nombre y tipo de producto.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            else
+            {
+                conectar.Open();
+                string consulta = "SELECT * FROM PRODUCTO WHERE Nombre LIKE '" + nombrecmd.Text + "%' AND Tipo = '" + cmdtipo.SelectedItem.ToString() + "'";
+
+                SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conectar); // Ejecutamos la consulta con SqlDataAdapter
+                DataTable dt = new DataTable();
+                adaptador.Fill(dt);
+
+                if (dt.Rows.Count > 0)  // Verificamos si se encontraron resultados
+                {
+                    dataGridView1.DataSource = dt;  // Si hay resultados, los mostramos en el DataGridView
+                }
+
+                else
+                {
+                    MessageBox.Show("No se encontró ningún producto con ese nombre.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dataGridView1.DataSource = null;  // Limpiamos el DataGridView si no encontramos ningun nombre
+                }
+
+                nombrecmd.Text = "";
+                cmdtipo.SelectedIndex = -1;
+
+                conectar.Close();
             }
         }
     }
