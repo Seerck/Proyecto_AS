@@ -64,7 +64,7 @@
             // panel
             // 
             this.panel.AutoScroll = true;
-            this.panel.BackColor = System.Drawing.Color.Teal;
+            this.panel.BackColor = System.Drawing.Color.Gray;
             this.panel.Controls.Add(this.btnCerraSesion);
             this.panel.Controls.Add(this.panelUsuariosSubMenu);
             this.panel.Controls.Add(this.btnUsuarios);
@@ -74,18 +74,18 @@
             this.panel.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel.Location = new System.Drawing.Point(0, 0);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(250, 575);
+            this.panel.Size = new System.Drawing.Size(250, 567);
             this.panel.TabIndex = 0;
             // 
             // btnCerraSesion
             // 
-            this.btnCerraSesion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCerraSesion.BackColor = System.Drawing.Color.DimGray;
             this.btnCerraSesion.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnCerraSesion.FlatAppearance.BorderSize = 0;
             this.btnCerraSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerraSesion.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnCerraSesion.ForeColor = System.Drawing.Color.LightGray;
-            this.btnCerraSesion.Location = new System.Drawing.Point(0, 530);
+            this.btnCerraSesion.ForeColor = System.Drawing.Color.White;
+            this.btnCerraSesion.Location = new System.Drawing.Point(0, 522);
             this.btnCerraSesion.Name = "btnCerraSesion";
             this.btnCerraSesion.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnCerraSesion.Size = new System.Drawing.Size(250, 45);
@@ -97,7 +97,7 @@
             // 
             // panelUsuariosSubMenu
             // 
-            this.panelUsuariosSubMenu.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.panelUsuariosSubMenu.BackColor = System.Drawing.Color.Gray;
             this.panelUsuariosSubMenu.Controls.Add(this.btnEditarUsuario);
             this.panelUsuariosSubMenu.Controls.Add(this.btnAñadirUsuario);
             this.panelUsuariosSubMenu.Controls.Add(this.btnMostarUsuario);
@@ -109,12 +109,12 @@
             // 
             // btnEditarUsuario
             // 
-            this.btnEditarUsuario.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnEditarUsuario.BackColor = System.Drawing.Color.Gainsboro;
             this.btnEditarUsuario.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnEditarUsuario.FlatAppearance.BorderSize = 0;
             this.btnEditarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditarUsuario.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnEditarUsuario.ForeColor = System.Drawing.Color.LightGray;
+            this.btnEditarUsuario.ForeColor = System.Drawing.Color.White;
             this.btnEditarUsuario.Location = new System.Drawing.Point(0, 80);
             this.btnEditarUsuario.Name = "btnEditarUsuario";
             this.btnEditarUsuario.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
@@ -127,12 +127,12 @@
             // 
             // btnAñadirUsuario
             // 
-            this.btnAñadirUsuario.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnAñadirUsuario.BackColor = System.Drawing.Color.Silver;
             this.btnAñadirUsuario.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnAñadirUsuario.FlatAppearance.BorderSize = 0;
             this.btnAñadirUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAñadirUsuario.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnAñadirUsuario.ForeColor = System.Drawing.Color.LightGray;
+            this.btnAñadirUsuario.ForeColor = System.Drawing.Color.White;
             this.btnAñadirUsuario.Location = new System.Drawing.Point(0, 40);
             this.btnAñadirUsuario.Name = "btnAñadirUsuario";
             this.btnAñadirUsuario.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
@@ -145,12 +145,12 @@
             // 
             // btnMostarUsuario
             // 
-            this.btnMostarUsuario.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnMostarUsuario.BackColor = System.Drawing.Color.DarkGray;
             this.btnMostarUsuario.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnMostarUsuario.FlatAppearance.BorderSize = 0;
             this.btnMostarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMostarUsuario.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnMostarUsuario.ForeColor = System.Drawing.Color.LightGray;
+            this.btnMostarUsuario.ForeColor = System.Drawing.Color.White;
             this.btnMostarUsuario.Location = new System.Drawing.Point(0, 0);
             this.btnMostarUsuario.Name = "btnMostarUsuario";
             this.btnMostarUsuario.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
@@ -163,12 +163,12 @@
             // 
             // btnUsuarios
             // 
-            this.btnUsuarios.BackColor = System.Drawing.Color.Teal;
+            this.btnUsuarios.BackColor = System.Drawing.Color.Gray;
             this.btnUsuarios.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnUsuarios.FlatAppearance.BorderSize = 0;
             this.btnUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUsuarios.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnUsuarios.ForeColor = System.Drawing.Color.LightGray;
+            this.btnUsuarios.ForeColor = System.Drawing.Color.White;
             this.btnUsuarios.Location = new System.Drawing.Point(0, 300);
             this.btnUsuarios.Name = "btnUsuarios";
             this.btnUsuarios.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -193,12 +193,12 @@
             // 
             // btnEditarProductos
             // 
-            this.btnEditarProductos.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnEditarProductos.BackColor = System.Drawing.Color.LightGray;
             this.btnEditarProductos.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnEditarProductos.FlatAppearance.BorderSize = 0;
             this.btnEditarProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditarProductos.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnEditarProductos.ForeColor = System.Drawing.Color.LightGray;
+            this.btnEditarProductos.ForeColor = System.Drawing.Color.White;
             this.btnEditarProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEditarProductos.Location = new System.Drawing.Point(0, 80);
             this.btnEditarProductos.Name = "btnEditarProductos";
@@ -212,12 +212,12 @@
             // 
             // btnAñadirProductos
             // 
-            this.btnAñadirProductos.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnAñadirProductos.BackColor = System.Drawing.Color.Silver;
             this.btnAñadirProductos.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnAñadirProductos.FlatAppearance.BorderSize = 0;
             this.btnAñadirProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAñadirProductos.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnAñadirProductos.ForeColor = System.Drawing.Color.LightGray;
+            this.btnAñadirProductos.ForeColor = System.Drawing.Color.White;
             this.btnAñadirProductos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAñadirProductos.Location = new System.Drawing.Point(0, 40);
             this.btnAñadirProductos.Name = "btnAñadirProductos";
@@ -231,12 +231,12 @@
             // 
             // btnMostrarProdutos
             // 
-            this.btnMostrarProdutos.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnMostrarProdutos.BackColor = System.Drawing.Color.DarkGray;
             this.btnMostrarProdutos.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnMostrarProdutos.FlatAppearance.BorderSize = 0;
             this.btnMostrarProdutos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMostrarProdutos.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnMostrarProdutos.ForeColor = System.Drawing.Color.LightGray;
+            this.btnMostrarProdutos.ForeColor = System.Drawing.Color.White;
             this.btnMostrarProdutos.Location = new System.Drawing.Point(0, 0);
             this.btnMostrarProdutos.Name = "btnMostrarProdutos";
             this.btnMostrarProdutos.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
@@ -249,12 +249,12 @@
             // 
             // btnProductos
             // 
-            this.btnProductos.BackColor = System.Drawing.Color.Teal;
+            this.btnProductos.BackColor = System.Drawing.Color.Gray;
             this.btnProductos.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnProductos.FlatAppearance.BorderSize = 0;
             this.btnProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProductos.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnProductos.ForeColor = System.Drawing.Color.LightGray;
+            this.btnProductos.ForeColor = System.Drawing.Color.White;
             this.btnProductos.Location = new System.Drawing.Point(0, 135);
             this.btnProductos.Name = "btnProductos";
             this.btnProductos.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
@@ -267,7 +267,7 @@
             // 
             // panelLogo
             // 
-            this.panelLogo.BackColor = System.Drawing.Color.Teal;
+            this.panelLogo.BackColor = System.Drawing.Color.Gray;
             this.panelLogo.Controls.Add(this.label1);
             this.panelLogo.Controls.Add(this.pictureBox1);
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
@@ -282,14 +282,14 @@
             this.label1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(69, 100);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 16);
+            this.label1.Size = new System.Drawing.Size(103, 19);
             this.label1.TabIndex = 1;
             this.label1.Text = "MI BODEGA";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(50, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(61, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(122, 85);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -298,7 +298,7 @@
             // 
             // panelChildForm
             // 
-            this.panelChildForm.BackColor = System.Drawing.Color.DarkCyan;
+            this.panelChildForm.BackColor = System.Drawing.Color.LightGray;
             this.panelChildForm.Controls.Add(this.pictureBox5);
             this.panelChildForm.Controls.Add(this.pictureBox4);
             this.panelChildForm.Controls.Add(this.pictureBox3);
@@ -306,7 +306,7 @@
             this.panelChildForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelChildForm.Location = new System.Drawing.Point(250, 0);
             this.panelChildForm.Name = "panelChildForm";
-            this.panelChildForm.Size = new System.Drawing.Size(894, 575);
+            this.panelChildForm.Size = new System.Drawing.Size(892, 567);
             this.panelChildForm.TabIndex = 1;
             this.panelChildForm.Paint += new System.Windows.Forms.PaintEventHandler(this.panelChildForm_Paint);
             // 
@@ -352,10 +352,10 @@
             // 
             // Form_Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1144, 575);
+            this.ClientSize = new System.Drawing.Size(1142, 567);
             this.Controls.Add(this.panelChildForm);
             this.Controls.Add(this.panel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
