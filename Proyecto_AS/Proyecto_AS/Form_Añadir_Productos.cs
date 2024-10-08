@@ -77,7 +77,7 @@ namespace Proyecto_AS
             data.Fill(red);
             conectar.Close();
             DataRow rod = red.NewRow();
-            rod["Nombre"] = "";
+            rod["Nombre"] = DBNull.Value;
             red.Rows.InsertAt(rod, 0);
 
         }
@@ -91,7 +91,7 @@ namespace Proyecto_AS
             data.Fill(red);
             conectar.Close();
             DataRow rod = red.NewRow();
-            rod["Tipo"] = "";
+            rod["Tipo"] = DBNull.Value;
             red.Rows.InsertAt(rod, 0);
         }
 
@@ -104,7 +104,7 @@ namespace Proyecto_AS
             data.Fill(red);
             conectar.Close();
             DataRow rod = red.NewRow();
-            rod["Cantidad"] = "";
+            rod["Cantidad"] = DBNull.Value;
             red.Rows.InsertAt(rod, 0);
         }
 
@@ -117,7 +117,7 @@ namespace Proyecto_AS
             data.Fill(red);
             conectar.Close();
             DataRow rod = red.NewRow();
-            rod["Precio"] = "";
+            rod["Precio"] = DBNull.Value;
             red.Rows.InsertAt(rod, 0);
         }
 
@@ -130,7 +130,7 @@ namespace Proyecto_AS
             data.Fill(red);
             conectar.Close();
             DataRow rod = red.NewRow();
-            rod["Caducidad"] = "";
+            rod["Caducidad"] = DBNull.Value;
             red.Rows.InsertAt(rod, 0);
         }
 
@@ -144,7 +144,7 @@ namespace Proyecto_AS
             data.Fill(red);
             conectar.Close();
             DataRow rod = red.NewRow();
-            rod["Ubicacion"] = "";
+            rod["Ubicacion"] = DBNull.Value;
             red.Rows.InsertAt(rod, 0);
         }
 
@@ -158,21 +158,13 @@ namespace Proyecto_AS
             data.Fill(red);
             conectar.Close();
             DataRow rod = red.NewRow();
-            rod["FechaIngreso"] = "";
+            rod["FechaIngreso"] = DBNull.Value;
             red.Rows.InsertAt(rod, 0);
         }
 
         public void FechaSalida()
         {
-            conectar.Open();
-            SqlCommand lol = new SqlCommand("select FechaSalida from PRODUCTO", conectar);
-            SqlDataAdapter data = new SqlDataAdapter(lol);
-            DataTable red = new DataTable();
-            data.Fill(red);
-            conectar.Close();
-            DataRow rod = red.NewRow();
-            rod["FechaSalida"] = "";
-            red.Rows.InsertAt(rod, 0);
+
         }
 
         public void Estado()
@@ -184,7 +176,7 @@ namespace Proyecto_AS
             data.Fill(red);
             conectar.Close();
             DataRow rod = red.NewRow();
-            rod["Estado"] = "";
+            rod["Estado"] = DBNull.Value;
             red.Rows.InsertAt(rod, 0);
         }
 
@@ -197,7 +189,7 @@ namespace Proyecto_AS
             data.Fill(red);
             conectar.Close();
             DataRow rod = red.NewRow();
-            rod["NivelEstante"] = "";
+            rod["NivelEstante"] = DBNull.Value;
             red.Rows.InsertAt(rod, 0);
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -309,15 +301,15 @@ namespace Proyecto_AS
             string texto = fechaingresocmd.Text.Replace("-","");
 
             // Formatear la fecha automáticamente
-            if (texto.Length > 2)
+            if (texto.Length > 4)
             {
-                texto = texto.Insert(2, "-");  //inserta la posicion 2 por el - 
+                texto = texto.Insert(4, "-");  //inserta la posicion 2 por el - 
             }
 
             // Actualizar el TextBox con el formato correcto
-            if (texto.Length > 5)
+            if (texto.Length > 7)
             {
-                texto = texto.Insert(5, "-");  //inserta la posicion 5 por el - 
+                texto = texto.Insert(7, "-");  //inserta la posicion 5 por el - 
             }
 
             fechaingresocmd.Text = texto;
@@ -326,8 +318,17 @@ namespace Proyecto_AS
             // Validar la fecha ingresada solo cuando tiene un formato completo
             if (fechaingresocmd.Text.Length == 10) // El formato esperado es "dd-MM-yyyy"
             {
+                // Verificar si los guiones están en la posición correcta
+                if (fechaingresocmd.Text.Length >= 5 && fechaingresocmd.Text[4] != '-' ||
+                    fechaingresocmd.Text.Length >= 8 && fechaingresocmd.Text[7] != '-')
+                {
+                    MessageBox.Show("Por favor, introduzca la fecha en el formato correcto: yyyy-MM-dd.", "Formato incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    fechaingresocmd.Focus();
+                    fechaingresocmd.SelectAll();
+                    return;
+                }
                 DateTime fecha;
-                bool esValida = DateTime.TryParseExact(fechaingresocmd.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fecha);
+                bool esValida = DateTime.TryParseExact(fechaingresocmd.Text, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out fecha);
 
                 if (esValida)
                 {
@@ -344,6 +345,7 @@ namespace Proyecto_AS
                     fechaingresocmd.SelectAll();
                     fechaingresocmd.Text = "";
                 }
+ 
             }
         }
 
@@ -352,15 +354,15 @@ namespace Proyecto_AS
             string texto = fecha_vencimientocmd.Text.Replace("-", "");
 
             // Formatear la fecha automáticamente
-            if (texto.Length > 2)
+            if (texto.Length > 4)
             {
-                texto = texto.Insert(2, "-");  //inserta la posicion 2 por el - 
+                texto = texto.Insert(4, "-");  // inserta la posicion 4 por el -
             }
 
             // Actualizar el TextBox con el formato correcto
-            if (texto.Length > 5)
+            if (texto.Length > 7)
             {
-                texto = texto.Insert(5, "-");  //inserta la posicion 5 por el - 
+                texto = texto.Insert(7, "-");  // inserta la posicion 7 por el -
             }
 
             fecha_vencimientocmd.Text = texto;
@@ -369,7 +371,7 @@ namespace Proyecto_AS
             if (fecha_vencimientocmd.Text.Length == 10) // El formato esperado es "dd-MM-yyyy"
             {
                 DateTime fecha;
-                bool esValida = DateTime.TryParseExact(fecha_vencimientocmd.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fecha);
+                bool esValida = DateTime.TryParseExact(fecha_vencimientocmd.Text, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out fecha);
 
                 if (esValida)
                 {
@@ -385,21 +387,6 @@ namespace Proyecto_AS
                     fecha_vencimientocmd.Focus();
                     fecha_vencimientocmd.SelectAll();
                     fecha_vencimientocmd.Text = "";
-                }
-                else
-                {
-                    // Si la fecha es válida, verifica si la fecha de vencimiento está próxima
-                    TimeSpan diferencia = fecha - DateTime.Now;
-
-                    if (diferencia.Days <= 7 && diferencia.Days >= 0)
-                    {
-                        MessageBox.Show($"La fecha de vencimiento está cerca, quedan {diferencia.Days} día(s).", "Aviso de vencimiento próximo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    else if (diferencia.Days < 0)
-                    {
-                        MessageBox.Show("La fecha de vencimiento ya ha pasado.", "Fecha vencida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-
                 }
             }
         }
