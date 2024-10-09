@@ -79,7 +79,7 @@
             // 
             // btnCerraSesion
             // 
-            this.btnCerraSesion.BackColor = System.Drawing.Color.DimGray;
+            this.btnCerraSesion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnCerraSesion.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnCerraSesion.FlatAppearance.BorderSize = 0;
             this.btnCerraSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -232,6 +232,7 @@
             // btnMostrarProdutos
             // 
             this.btnMostrarProdutos.BackColor = System.Drawing.Color.DarkGray;
+            this.btnMostrarProdutos.Cursor = System.Windows.Forms.Cursors.No;
             this.btnMostrarProdutos.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnMostrarProdutos.FlatAppearance.BorderSize = 0;
             this.btnMostrarProdutos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -280,7 +281,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(69, 100);
+            this.label1.Location = new System.Drawing.Point(71, 100);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 19);
             this.label1.TabIndex = 1;
@@ -298,7 +299,7 @@
             // 
             // panelChildForm
             // 
-            this.panelChildForm.BackColor = System.Drawing.Color.LightGray;
+            this.panelChildForm.BackColor = System.Drawing.Color.Gainsboro;
             this.panelChildForm.Controls.Add(this.pictureBox5);
             this.panelChildForm.Controls.Add(this.pictureBox4);
             this.panelChildForm.Controls.Add(this.pictureBox3);
@@ -343,7 +344,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(313, 140);
+            this.pictureBox2.Location = new System.Drawing.Point(320, 140);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(200, 200);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
