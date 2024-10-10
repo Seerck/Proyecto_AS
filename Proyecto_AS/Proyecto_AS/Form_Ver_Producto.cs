@@ -16,7 +16,8 @@ namespace Proyecto_AS
     {
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
         //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;"; 
-        static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
+        //static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
+        static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
         public Form_Ver_Producto()
         {
