@@ -18,8 +18,8 @@ namespace Proyecto_AS
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
         //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
         //static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
-        //static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
-        static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
+        static string inicio_sesion = "Server=LAPTOP-OBQGVQ1D ;Database=BD_AS ;User id=sa ;Password=2024;";
+        //static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
         public Form_Añadir_Productos()
         {
@@ -38,18 +38,50 @@ namespace Proyecto_AS
 
         public void insertar()
         {
-            if (nombrecmd.Text != "" && cmdtipo.SelectedIndex > -1  && txt_cantidad.Text != "" && txt_precio.Text != "" && ubicacioncmd.Text != "" &&
-                fechaingresocmd.Text !=  ""  && estantecmd.Text != "" && estadocmb.SelectedIndex > -1 )
+            if (nombrecmd.Text != "" && cmdtipo.SelectedIndex > -1 && txt_cantidad.Text != "" && txt_precio.Text != "" && ubicacioncmd.Text != "" &&
+                fechaingresocmd.Text != "" && estantecmd.Text != "" && estadocmb.SelectedIndex > -1 && fecha_vencimientocmd.Text != "")
             {
+                DateTime fechaIngreso;
+                if (!DateTime.TryParseExact(fechaingresocmd.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fechaIngreso))
+                {
+                    MessageBox.Show("El formato de la fecha de ingreso es inválido. Por favor, utilice el formato dd-MM-yyyy.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; // Sale del método si la fecha es inválida
+                }
+
+                DateTime? fechaVencimiento = null;
+                if (!string.IsNullOrWhiteSpace(fecha_vencimientocmd.Text))
+                {
+                    if (!DateTime.TryParseExact(fecha_vencimientocmd.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime vencimiento))
+                    {
+                        MessageBox.Show("El formato de la fecha de vencimiento es inválido. Por favor, utilice el formato dd-MM-yyyy.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return; // Sale del método si la fecha es inválida
+                    }
+                    fechaVencimiento = vencimiento; // Asigna la fecha de vencimiento si es válida
+                }
+
+                string fechaIngresoSql = fechaIngreso.ToString("yyyy-MM-dd");
                 string caducidadValue = string.IsNullOrWhiteSpace(fecha_vencimientocmd.Text) ? "NULL" : "'" + fecha_vencimientocmd.Text + "'";
-                string cmd = "INSERT INTO PRODUCTO (Nombre, Tipo, Cantidad, Precio, Ubicacion, FechaIngreso,  Estado, NivelEstante) " +
-                     "VALUES ('" + nombrecmd.Text + "','" + cmdtipo.Text + "', '" + txt_cantidad.Text + "','" + txt_precio.Text + "','" + ubicacioncmd.Text + "', '" + fechaingresocmd.Text + "','" + estadocmb.Text + "', '" + estantecmd.Text + "')";
+
+                string cmd = "INSERT INTO PRODUCTO (Nombre, Tipo, Cantidad, Precio,Caducidad, Ubicacion, FechaIngreso, Estado, NivelEstante) " +
+                             "VALUES (@Nombre, @Tipo, @Cantidad, @Precio,@Caducidad, @Ubicacion, @FechaIngreso, @Estado, @NivelEstante)";
+
                 SqlCommand sqlCommand = new SqlCommand(cmd, conectar);
+
+                // Agrega los parámetros para evitar problemas de inyección SQL
+                sqlCommand.Parameters.AddWithValue("@Nombre", nombrecmd.Text);
+                sqlCommand.Parameters.AddWithValue("@Tipo", cmdtipo.SelectedIndex);
+                sqlCommand.Parameters.AddWithValue("@Cantidad", txt_cantidad.Text);
+                sqlCommand.Parameters.AddWithValue("@Precio", txt_precio.Text);
+                sqlCommand.Parameters.AddWithValue("@Caducidad", fechaVencimiento.HasValue ? (object)fechaVencimiento.Value : DBNull.Value); // Asigna DBNull si no hay fecha
+                sqlCommand.Parameters.AddWithValue("@Ubicacion", ubicacioncmd.Text);
+                sqlCommand.Parameters.AddWithValue("@FechaIngreso", fechaIngresoSql); // Usa la fecha ya formateada
+                sqlCommand.Parameters.AddWithValue("@Estado", estadocmb.SelectedIndex);
+                sqlCommand.Parameters.AddWithValue("@NivelEstante", estantecmd.Text);
+
                 conectar.Open();
                 sqlCommand.ExecuteNonQuery();
-                conectar.Close();
-
                 MessageBox.Show("Se ha registrado correctamente");
+                conectar.Close();
 
                 // Limpiar campos después de registrar
                 nombrecmd.Text = "";
@@ -61,6 +93,7 @@ namespace Proyecto_AS
                 fecha_vencimientocmd.Text = "";
                 estantecmd.Text = "";
                 estadocmb.SelectedIndex = -1;
+
             }
             else
             {
@@ -298,18 +331,18 @@ namespace Proyecto_AS
 
         private void fechaingresocmd_TextChanged(object sender, EventArgs e)
         {
-            string texto = fechaingresocmd.Text.Replace("-","");
+            string texto = fechaingresocmd.Text.Replace("-", "");
 
             // Formatear la fecha automáticamente
-            if (texto.Length > 4)
+            if (texto.Length > 2)
             {
-                texto = texto.Insert(4, "-");  //inserta la posicion 2 por el - 
+                texto = texto.Insert(2, "-");  //inserta la posicion 2 por el - 
             }
 
             // Actualizar el TextBox con el formato correcto
-            if (texto.Length > 7)
+            if (texto.Length > 5)
             {
-                texto = texto.Insert(7, "-");  //inserta la posicion 5 por el - 
+                texto = texto.Insert(5, "-");  //inserta la posicion 5 por el - 
             }
 
             fechaingresocmd.Text = texto;
@@ -318,17 +351,8 @@ namespace Proyecto_AS
             // Validar la fecha ingresada solo cuando tiene un formato completo
             if (fechaingresocmd.Text.Length == 10) // El formato esperado es "dd-MM-yyyy"
             {
-                // Verificar si los guiones están en la posición correcta
-                if (fechaingresocmd.Text.Length >= 5 && fechaingresocmd.Text[4] != '-' ||
-                    fechaingresocmd.Text.Length >= 8 && fechaingresocmd.Text[7] != '-')
-                {
-                    MessageBox.Show("Por favor, introduzca la fecha en el formato correcto: yyyy-MM-dd.", "Formato incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    fechaingresocmd.Focus();
-                    fechaingresocmd.SelectAll();
-                    return;
-                }
                 DateTime fecha;
-                bool esValida = DateTime.TryParseExact(fechaingresocmd.Text, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out fecha);
+                bool esValida = DateTime.TryParseExact(fechaingresocmd.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fecha);
 
                 if (esValida)
                 {
@@ -345,7 +369,7 @@ namespace Proyecto_AS
                     fechaingresocmd.SelectAll();
                     fechaingresocmd.Text = "";
                 }
- 
+                
             }
         }
 
@@ -354,15 +378,15 @@ namespace Proyecto_AS
             string texto = fecha_vencimientocmd.Text.Replace("-", "");
 
             // Formatear la fecha automáticamente
-            if (texto.Length > 4)
+            if (texto.Length > 2)
             {
-                texto = texto.Insert(4, "-");  // inserta la posicion 4 por el -
+                texto = texto.Insert(2, "-");  // inserta la posicion 4 por el -
             }
 
             // Actualizar el TextBox con el formato correcto
-            if (texto.Length > 7)
+            if (texto.Length > 5)
             {
-                texto = texto.Insert(7, "-");  // inserta la posicion 7 por el -
+                texto = texto.Insert(5, "-");  // inserta la posicion 7 por el -
             }
 
             fecha_vencimientocmd.Text = texto;
@@ -371,7 +395,7 @@ namespace Proyecto_AS
             if (fecha_vencimientocmd.Text.Length == 10) // El formato esperado es "dd-MM-yyyy"
             {
                 DateTime fecha;
-                bool esValida = DateTime.TryParseExact(fecha_vencimientocmd.Text, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out fecha);
+                bool esValida = DateTime.TryParseExact(fecha_vencimientocmd.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fecha);
 
                 if (esValida)
                 {
