@@ -39,8 +39,9 @@ namespace Proyecto_AS
         public void insertar()
         {
             if (nombrecmd.Text != "" && cmdtipo.SelectedIndex > -1 && txt_cantidad.Text != "" && txt_precio.Text != "" && ubicacioncmd.Text != "" &&
-                fechaingresocmd.Text != "" && estantecmd.Text != "" && estadocmb.SelectedIndex > -1 && fecha_vencimientocmd.Text != "")
+                fechaingresocmd.Text != "" && estantecmd.Text != "" && estadocmb.SelectedIndex > -1)
             {
+                //intentamos convertir la fecha en un formato que sql nos permita
                 DateTime fechaIngreso;
                 if (!DateTime.TryParseExact(fechaingresocmd.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fechaIngreso))
                 {
@@ -51,6 +52,7 @@ namespace Proyecto_AS
                 DateTime? fechaVencimiento = null;
                 if (!string.IsNullOrWhiteSpace(fecha_vencimientocmd.Text))
                 {
+                    //lo mismo realizado en ingreso pero ahora en fecha vencimiento
                     if (!DateTime.TryParseExact(fecha_vencimientocmd.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime vencimiento))
                     {
                         MessageBox.Show("El formato de la fecha de vencimiento es inválido. Por favor, utilice el formato dd-MM-yyyy.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -130,7 +132,7 @@ namespace Proyecto_AS
 
         public void Cantidad()
         {
-             conectar.Open();
+            conectar.Open();
             SqlCommand lol = new SqlCommand("select Cantidad from PRODUCTO", conectar);
             SqlDataAdapter data = new SqlDataAdapter(lol);
             DataTable red = new DataTable();
@@ -195,6 +197,11 @@ namespace Proyecto_AS
             red.Rows.InsertAt(rod, 0);
         }
 
+        public void Mostrarultimoregistro()
+        {
+
+        }
+
         public void FechaSalida()
         {
 
@@ -228,16 +235,6 @@ namespace Proyecto_AS
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             consultar();
-            Nombre();
-            Tipo();
-            Cantidad();
-            Precio();
-            Caducidad();
-            Ubicacion();
-            FechaIngreso();
-            FechaSalida();
-            Estado();
-            NivelEstante();
         }
 
         private void btnañadir_Click(object sender, EventArgs e)
