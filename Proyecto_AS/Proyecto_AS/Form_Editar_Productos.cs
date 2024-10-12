@@ -64,28 +64,51 @@ namespace Proyecto_AS
 
         private void btnañadir_Click(object sender, EventArgs e)
         {
+            // Validación de fechas
+            DateTime fechaIngreso;
+            if (!DateTime.TryParseExact(txt_fecha_i.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out fechaIngreso))
+            {
+                MessageBox.Show("El formato de la fecha de ingreso es inválido. Por favor, utilice el formato dd-MM-yyyy.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DateTime? fechaVencimiento = null;
+            if (!string.IsNullOrWhiteSpace(txt_fecha_v.Text))
+            {
+                if (!DateTime.TryParseExact(txt_fecha_v.Text, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime vencimiento))
+                {
+                    MessageBox.Show("El formato de la fecha de vencimiento es inválido. Por favor, utilice el formato dd-MM-yyyy.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                fechaVencimiento = vencimiento;
+            }
+
+            string fechaIngresoSql = fechaIngreso.ToString("yyyy-MM-dd");
+            string caducidadValue = fechaVencimiento.HasValue ? fechaVencimiento.Value.ToString("yyyy-MM-dd") : "NULL";
+
             if (!string.IsNullOrEmpty(variable_id))
             {
                 if (txt_nombre.Text != "" & cmb_tipo.SelectedIndex > -1 & txt_cantidad.Text != "" & txt_precio.Text != "" & txt_ubicacion.Text != "" & txt_fecha_i.Text != "" & txt_nivel.Text != "" & cmb_estado.SelectedIndex > -1)
                 {
-                    string edit = "UPDATE PRODUCTO SET Nombre = '" + txt_nombre.Text + "', Tipo = '" + cmb_tipo.SelectedItem.ToString() + "', Cantidad = '" + txt_cantidad.Text + "', Precio = '" + txt_precio.Text + "', Caducidad = '" + txt_fecha_v.Text + "', Ubicacion = '" + txt_ubicacion.Text + "', FechaIngreso = '" + txt_fecha_i.Text + "', Estado = '" + cmb_estado.SelectedItem.ToString() + "', NivelEstante = '" + txt_nivel.Text + "' WHERE Id = '" + variable_id + "'";
+                    // Usar la fecha ya convertida
+                    string edit = "UPDATE PRODUCTO SET Nombre = '" + txt_nombre.Text + "', Tipo = '" + cmb_tipo.SelectedItem.ToString() + "', Cantidad = '" + txt_cantidad.Text + "', Precio = '" + txt_precio.Text + "', Caducidad = " + (caducidadValue == "NULL" ? caducidadValue : "'" + caducidadValue + "'") + ", Ubicacion = '" + txt_ubicacion.Text + "', FechaIngreso = '" + fechaIngresoSql + "', Estado = '" + cmb_estado.SelectedItem.ToString() + "', NivelEstante = '" + txt_nivel.Text + "' WHERE Id = '" + variable_id + "'";
+
                     SqlCommand sqlCommand = new SqlCommand(edit, conectar);
                     conectar.Open();
                     sqlCommand.ExecuteNonQuery();
                     conectar.Close();
 
                     dataGridView1.DataSource = null;   // Limpiar datos anteriores
-
                     MessageBox.Show("Se han actualizado los datos del producto.");
 
                     conectar.Open();
                     string consulta = "SELECT * FROM PRODUCTO WHERE Id = '" + variable_id + "'";
-
                     SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conectar); // Ejecutamos la consulta con SqlDataAdapter
                     DataTable dt = new DataTable();
                     adaptador.Fill(dt);
                     conectar.Close();
 
+                    // Limpiar los TextBoxes y ComboBoxes
                     txt_nombre.Text = "";
                     txt_cantidad.Text = "";
                     txt_precio.Text = "";
@@ -108,7 +131,7 @@ namespace Proyecto_AS
             }
             else
             {
-                MessageBox.Show("Seleccione algun producto antes de actualizar", "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Seleccione algún producto antes de actualizar", "INFORMACION", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 txt_nombre.Text = "";
                 txt_cantidad.Text = "";

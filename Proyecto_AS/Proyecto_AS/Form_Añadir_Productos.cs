@@ -71,7 +71,7 @@ namespace Proyecto_AS
 
                 // Agrega los parámetros para evitar problemas de inyección SQL
                 sqlCommand.Parameters.AddWithValue("@Nombre", nombrecmd.Text);
-                sqlCommand.Parameters.AddWithValue("@Tipo", cmdtipo.SelectedIndex);
+                sqlCommand.Parameters.AddWithValue("@Tipo", cmdtipo.SelectedItem.ToString());
                 sqlCommand.Parameters.AddWithValue("@Cantidad", txt_cantidad.Text);
                 sqlCommand.Parameters.AddWithValue("@Precio", txt_precio.Text);
                 sqlCommand.Parameters.AddWithValue("@Caducidad", fechaVencimiento.HasValue ? (object)fechaVencimiento.Value : DBNull.Value); // Asigna DBNull si no hay fecha
