@@ -108,5 +108,10 @@ namespace Proyecto_AS
                 MessageBox.Show("Solo se permiten letras y espacios en este campo.");
             }
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
