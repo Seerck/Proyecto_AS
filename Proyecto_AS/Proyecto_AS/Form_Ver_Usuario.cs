@@ -89,7 +89,7 @@ namespace Proyecto_AS
 
                 else
                 {
-                    MessageBox.Show("No se encontró ningún usuario con ese Tipo.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No se encontró ningún usuario con ese Tipo o Nombre.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataGridView1.DataSource = null;  // Limpiamos el DataGridView si no encontramos ningun nombre
                 }
 
