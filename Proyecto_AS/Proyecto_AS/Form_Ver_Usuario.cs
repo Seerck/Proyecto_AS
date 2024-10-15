@@ -16,8 +16,8 @@ namespace Proyecto_AS
     {
         //Creamos un string el cual contendra los datos para necesario para poder conectarse a la bd
         //static string inicio_sesion = "Server=LAPTOP-9H0B86NU ;Database=BD_AS ;User id=sa ;Password=697400naxo;";
-        //static string inicio_sesion = "Server=DESKTOP-5RJ2UO2\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
-        static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
+        static string inicio_sesion = "Server=PAOLO\\SQLEXPRESS ;Database=BD_AS ;User id=sa ;Password=12345678;";
+        //static string inicio_sesion = "Server=LAPTOP-PEB8KTKM ;Database=BD_AS ;User id=sa ;Password=1253351;";
         SqlConnection conectar = new SqlConnection(inicio_sesion); /*asignamos el comando para la conexion*/
 
         Dictionary<string, string> datos = new Dictionary<string, string>()
@@ -89,7 +89,7 @@ namespace Proyecto_AS
 
                 else
                 {
-                    MessageBox.Show("No se encontró ningún usuario con ese nombre.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("No se encontró ningún usuario con ese Tipo.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataGridView1.DataSource = null;  // Limpiamos el DataGridView si no encontramos ningun nombre
                 }
 

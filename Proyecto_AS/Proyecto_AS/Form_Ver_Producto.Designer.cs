@@ -34,7 +34,9 @@
             this.TxtNombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TxtTipo = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -45,21 +47,21 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.Gray;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.Color.DarkSlateGray;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 11);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridView1.Location = new System.Drawing.Point(9, 9);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(812, 335);
+            this.dataGridView1.Size = new System.Drawing.Size(609, 272);
             this.dataGridView1.TabIndex = 1;
             // 
             // BtnBuscar
             // 
             this.BtnBuscar.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold);
-            this.BtnBuscar.Location = new System.Drawing.Point(571, 450);
-            this.BtnBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BtnBuscar.Location = new System.Drawing.Point(419, 71);
+            this.BtnBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BtnBuscar.Name = "BtnBuscar";
-            this.BtnBuscar.Size = new System.Drawing.Size(156, 42);
+            this.BtnBuscar.Size = new System.Drawing.Size(117, 34);
             this.BtnBuscar.TabIndex = 2;
             this.BtnBuscar.Text = "Buscar";
             this.BtnBuscar.UseVisualStyleBackColor = true;
@@ -69,9 +71,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(24, 385);
+            this.label1.Location = new System.Drawing.Point(20, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 19);
+            this.label1.Size = new System.Drawing.Size(130, 16);
             this.label1.TabIndex = 3;
             this.label1.Text = "Nombre Producto";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -79,11 +82,11 @@
             // TxtNombre
             // 
             this.TxtNombre.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold);
-            this.TxtNombre.Location = new System.Drawing.Point(251, 382);
-            this.TxtNombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TxtNombre.Location = new System.Drawing.Point(179, 15);
+            this.TxtNombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TxtNombre.MaxLength = 25;
             this.TxtNombre.Name = "TxtNombre";
-            this.TxtNombre.Size = new System.Drawing.Size(261, 27);
+            this.TxtNombre.Size = new System.Drawing.Size(197, 23);
             this.TxtNombre.TabIndex = 5;
             this.TxtNombre.TextChanged += new System.EventHandler(this.TxtNombre_TextChanged);
             this.TxtNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNombre_KeyPress);
@@ -92,9 +95,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(24, 462);
+            this.label3.Location = new System.Drawing.Point(20, 80);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(121, 19);
+            this.label3.Size = new System.Drawing.Size(105, 16);
             this.label3.TabIndex = 7;
             this.label3.Text = "Tipo Producto";
             // 
@@ -107,34 +111,44 @@
             "Ropa",
             "Electronico",
             "Calzado"});
-            this.TxtTipo.Location = new System.Drawing.Point(251, 458);
-            this.TxtTipo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TxtTipo.Location = new System.Drawing.Point(179, 77);
+            this.TxtTipo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.TxtTipo.Name = "TxtTipo";
-            this.TxtTipo.Size = new System.Drawing.Size(261, 27);
+            this.TxtTipo.Size = new System.Drawing.Size(197, 24);
             this.TxtTipo.TabIndex = 25;
             this.TxtTipo.Text = "Seleccionar";
             this.TxtTipo.SelectedIndexChanged += new System.EventHandler(this.TxtTipo_SelectedIndexChanged);
             this.TxtTipo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtTipo_KeyPress);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Gray;
+            this.panel1.Controls.Add(this.TxtTipo);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.TxtNombre);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.BtnBuscar);
+            this.panel1.Location = new System.Drawing.Point(9, 295);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(609, 144);
+            this.panel1.TabIndex = 26;
+            // 
             // Form_Ver_Producto
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
-            this.ClientSize = new System.Drawing.Size(832, 567);
-            this.Controls.Add(this.TxtTipo);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.TxtNombre);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.BtnBuscar);
+            this.ClientSize = new System.Drawing.Size(624, 461);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form_Ver_Producto";
             this.Load += new System.EventHandler(this.Form_Ver_Producto_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -146,5 +160,6 @@
         private System.Windows.Forms.TextBox TxtNombre;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox TxtTipo;
+        private System.Windows.Forms.Panel panel1;
     }
 }
